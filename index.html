@@ -712,6 +712,40 @@
             status.classList.remove('text-slate-400');
             status.classList.add('text-emerald-400', 'font-bold');
         }
+        suggestForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    const toast = document.getElementById('form-toast');
+    const formData = new FormData(suggestForm);
+
+    try {
+        // Отправляем реальные данные на ваш Formspree endpoint
+        const response = await fetch(suggestForm.action, {
+            method: 'POST',
+            body: formData,
+            headers: { 
+                'Accept': 'application/json' 
+            }
+        });
+
+        if (response.ok) {
+            // Если Formspree принял сообщение:
+            toast.textContent = 'Сообщение успешно отправлено!';
+            toast.classList.remove('hidden');
+            suggestForm.reset(); // Очищаем поля
+            
+            setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 4000);
+        } else {
+            // Если Formspree вернул ошибку:
+            const errorData = await response.json();
+            alert('Ошибка Formspree: ' + (errorData.errors ? errorData.errors.map(err => err.message).join(', ') : 'Не удалось отправить'));
+        }
+    } catch (err) {
+        alert('Ошибка сети! Проверьте подключение.');
+    }
+});
     </script>
 </body>
 </html>
