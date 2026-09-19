@@ -490,31 +490,27 @@
                         </div>
 
                         <!-- Tab 1: Form -->
-                        <form id="suggest-form" class="space-y-4" action="https://formspree.io/f/mqpaeegj" method="POST" accept-charset="UTF-8">
-                           <div>
-                                <label class="block text-xs font-semibold text-slate-300 mb-1">Категория обращения</label>
-                                <select id="msg-category" class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl px-4 py-2.5 text-xs focus:ring-2 focus:ring-adg-green focus:outline-none">
-                                    <option value="circle">Предложить вариант кружка</option>
-                                    <option value="complaint">Жалоба / Пожелание</option>
-                                    <option value="academic">Академическая помощь</option>
-                                    <option value="referendum">Предложение для референдума</option>
-                                </select>
-                            </div>
+                       <form id="suggest-form" class="space-y-4" action="https://formspree.io/f/mqpaeegj" method="POST">
+  <div>
+    <label class="block text-xs font-semibold text-slate-300 mb-1">Категория обращения</label>
+    <select name="category" id="msg-category" class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl px-4 py-2.5 text-xs focus:ring-2 focus:ring-adg-green focus:outline-none">
+      <option value="Предложить вариант кружка">Предложить вариант кружка</option>
+      <option value="Жалоба / Пожелание">Жалоба / Пожелание</option>
+      <option value="Академическая помощь">Академическая помощь</option>
+      <option value="Предложение для референдума">Предложение для референдума</option>
+    </select>
+  </div>
 
-                            <div>
-                                <label class="block text-xs font-semibold text-slate-300 mb-1">Ваше сообщение</label>
-                                <textarea id="msg-text" rows="4" placeholder="Опишите вашу идею или вопрос подробнее..." required class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl p-3 text-xs focus:ring-2 focus:ring-adg-green focus:outline-none"></textarea>
-                            </div>
+  <div>
+    <label class="block text-xs font-semibold text-slate-300 mb-1">Ваше сообщение</label>
+    <textarea name="message" id="msg-text" rows="4" placeholder="Опишите вашу идею или вопрос подробнее..." required class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl p-3 text-xs focus:ring-2 focus:ring-adg-green focus:outline-none"></textarea>
+  </div>
 
-                            <button type="submit" class="w-full bg-adg-green hover:bg-adg-greenDark text-white py-3 rounded-xl font-bold text-xs transition-all shadow-lg flex items-center justify-center gap-2">
-                                <i class="fa-solid fa-paper-plane"></i>
-                                <span>Отправить анонимно</span>
-                            </button>
-
-                            <div id="form-toast" class="hidden text-center p-2 rounded-lg bg-emerald-500/20 text-emerald-300 text-xs font-medium">
-                                <i class="fa-solid fa-circle-check mr-1"></i> Сообщение успешно отправлено!
-                            </div>
-                        </form>
+  <button type="submit" class="w-full bg-adg-green hover:bg-adg-greenDark text-white py-3 rounded-xl font-bold text-xs transition-all shadow-lg flex items-center justify-center gap-2">
+    <i class="fa-solid fa-paper-plane"></i>
+    <span>Отправить анонимно</span>
+  </button>
+</form>
 
                         <!-- Tab 2: Live Referendum Demo (hidden by default) -->
                         <div id="poll-box" class="hidden space-y-4">
@@ -716,10 +712,14 @@
     e.preventDefault();
     
     const toast = document.getElementById('form-toast');
-    
-    // Преобразуем данные формы в обычный JS-объект JSON
     const formData = new FormData(suggestForm);
     const data = Object.fromEntries(formData.entries());
+
+    // Проверка, что сообщение не пустое
+    if (!data.message || data.message.trim() === "") {
+        alert("Пожалуйста, напишите текст обращения.");
+        return;
+    }
 
     try {
         const response = await fetch(suggestForm.action, {
@@ -732,19 +732,26 @@
         });
 
         if (response.ok) {
-            toast.textContent = 'Сообщение успешно отправлено!';
-            toast.classList.remove('hidden');
-            suggestForm.reset();
-            
-            setTimeout(() => {
-                toast.classList.add('hidden');
-            }, 4000);
+            // Показываем плашку об успешной отправке
+            if (toast) {
+                toast.textContent = 'Сообщение успешно отправлено!';
+                toast.classList.remove('hidden');
+                
+                // Скрываем плашку через 4 секунды
+                setTimeout(() => {
+                    toast.classList.add('hidden');
+                }, 4000);
+            } else {
+                alert('Сообщение успешно отправлено!');
+            }
+
+            suggestForm.reset(); // Очищаем форму после отправки
         } else {
             const errorData = await response.json();
             alert('Ошибка Formspree: ' + (errorData.errors ? errorData.errors.map(err => err.message).join(', ') : 'Не удалось отправить'));
         }
     } catch (err) {
-        alert('Ошибка сети! Проверьте подключение.');
+        alert('Ошибка сети! Проверьте подключение к интернету.');
     }
 });
     </script>
