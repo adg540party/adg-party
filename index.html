@@ -772,31 +772,31 @@
     }
 });
   <script>
-  // Функция скрытия формы, если уже голосовал
+  <script>
   function applyPollRestriction() {
-    if (localStorage.getItem('hasVotedInPoll') === 'true') {
-      const pollOptionsList = document.getElementById('poll-options-list');
-      const pollSubmitBtn = document.getElementById('poll-submit-btn');
-      const pollAlreadyVoted = document.getElementById('poll-already-voted');
+    const pollOptionsList = document.getElementById('poll-options-list');
+    const pollSubmitBtn = document.getElementById('poll-submit-btn');
+    const pollAlreadyVoted = document.getElementById('poll-already-voted');
 
+    if (localStorage.getItem('hasVotedInPoll') === 'true') {
       if (pollOptionsList) pollOptionsList.style.display = 'none';
       if (pollSubmitBtn) pollSubmitBtn.style.display = 'none';
       if (pollAlreadyVoted) pollAlreadyVoted.classList.remove('hidden');
     }
   }
 
-  // 1. Проверяем сразу при загрузке и при возврате со страницы Formspree
+  // 1. Проверяем статус при первой загрузке и при возврате со стороннего сайта (Formspree)
   document.addEventListener('DOMContentLoaded', applyPollRestriction);
   window.addEventListener('pageshow', applyPollRestriction);
 
-  // 2. ЗАПИСЫВАЕМ СРАЗУ ПРИ КЛИКЕ НА ЛЮБОЙ ВАРИАНТ ОТВЕТА (до нажатия кнопки)
+  // 2. ЗАПИСЫВАЕМ СРАЗУ при клике на радио-кнопку (выбор ответа)
   document.addEventListener('change', (e) => {
     if (e.target && e.target.name === 'poll_option') {
       localStorage.setItem('hasVotedInPoll', 'true');
     }
   });
 
-  // 3. Страховка при клике на саму кнопку отправки
+  // 3. Дополнительная страховка при клике на саму кнопку отправки
   document.addEventListener('click', (e) => {
     if (e.target && e.target.closest('#poll-submit-btn')) {
       localStorage.setItem('hasVotedInPoll', 'true');
