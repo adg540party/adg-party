@@ -771,7 +771,9 @@
         alert('Ошибка сети! Проверьте подключение к интернету.');
     }
 });
-  <script>
+</script>
+
+<script>
   function applyPollRestriction() {
     const pollOptionsList = document.getElementById('poll-options-list');
     const pollSubmitBtn = document.getElementById('poll-submit-btn');
@@ -784,18 +786,15 @@
     }
   }
 
-  // 1. Проверяем статус при первой загрузке и при возврате со стороннего сайта (Formspree)
   document.addEventListener('DOMContentLoaded', applyPollRestriction);
   window.addEventListener('pageshow', applyPollRestriction);
 
-  // 2. ЗАПИСЫВАЕМ СРАЗУ при клике на радио-кнопку (выбор ответа)
   document.addEventListener('change', (e) => {
     if (e.target && e.target.name === 'poll_option') {
       localStorage.setItem('hasVotedInPoll', 'true');
     }
   });
 
-  // 3. Дополнительная страховка при клике на саму кнопку отправки
   document.addEventListener('click', (e) => {
     if (e.target && e.target.closest('#poll-submit-btn')) {
       localStorage.setItem('hasVotedInPoll', 'true');
