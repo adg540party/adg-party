@@ -539,7 +539,7 @@
               </label>
             </div>
 
-            <button id="poll-submit-btn" type="submit" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white py-3 rounded-xl font-bold text-xs uppercase tracking-wider transition-all duration-200 shadow-lg flex items-center justify-center gap-2 mt-4">
+            <button id="poll-submit-btn" type="submit" onclick="localStorage.setItem('hasVotedInPoll', 'true')" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white py-3 rounded-xl font-bold text-xs uppercase tracking-wider transition-all duration-200 shadow-lg flex items-center justify-center gap-2 mt-4">
               <i class="fa-solid fa-check-to-slot"></i>
               <span>Проголосовать</span>
             </button>
@@ -771,7 +771,6 @@
         alert('Ошибка сети! Проверьте подключение к интернету.');
     }
 });
-  <script>
   <script>
   function applyPollRestriction() {
     const pollOptionsList = document.getElementById('poll-options-list');
