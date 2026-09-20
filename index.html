@@ -502,34 +502,33 @@
   </div>
 
   <div>
-    <label class="block text-xs font-semibold text-slate-300 mb-1">Ваше сообщение</label>
-    <textarea name="message" id="msg-text" rows="4" placeholder="Опишите вашу идею или вопрос подробнее..." required class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl p-3 text-xs focus:ring-2 focus:ring-adg-green focus:outline-none"></textarea>
-  </div>
-
-  <button type="submit" class="w-full bg-adg-green hover:bg-adg-greenDark text-white py-3 rounded-xl font-bold text-xs transition-all shadow-lg flex items-center justify-center gap-2">
-    <i class="fa-solid fa-paper-plane"></i>
-    <span>Отправить анонимно</span>
-  </button>
-</form>
-
-                        <!-- Tab 2: Live Referendum Demo -->
-        <div id="poll-box" class="hidden space-y-4">
-          <div class="w-full overflow-hidden rounded-xl border border-slate-700 bg-slate-800/80 shadow-xl">
-            <iframe 
-              src="https://docs.google.com/forms/d/e/1FAIpQLSfSuKHUADf3rKw8I2m5jFOWg0URRA3HDvTrM8pCujInakFc8g/viewform?embedded=true" 
-              width="100%" 
-              height="520" 
-              frameborder="0" 
-              marginheight="0" 
-              marginwidth="0"
-              class="w-full rounded-xl"
-            >
-              Загрузка опроса…
-            </iframe>
+            <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Ваше сообщение / Идея</label>
+            <textarea name="message" id="msg-text" rows="4" placeholder="Опишите вашу идею или вопрос подробнее..." required class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500"></textarea>
           </div>
-        </div>
-
+          <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white py-3 rounded-xl font-bold text-xs uppercase tracking-wider transition-all duration-200 shadow-lg flex items-center justify-center gap-2">
+            <i class="fa-solid fa-paper-plane"></i>
+            <span>Отправить анонимно</span>
+          </button>
+        </form>
       </div>
+
+      <!-- Tab 2: Live Referendum Demo -->
+      <div id="poll-box" class="hidden space-y-4">
+        <div class="w-full overflow-hidden rounded-xl border border-slate-700 bg-slate-800/80 shadow-xl">
+          <iframe 
+            src="https://docs.google.com/forms/d/e/1FAIpQLSfSuKHUADf3rKw8I2m5jFOWg0URRA3HDvTrM8pCujInakFc8g/viewform?embedded=true" 
+            width="100%" 
+            height="520" 
+            frameborder="0" 
+            marginheight="0" 
+            marginwidth="0"
+            class="w-full rounded-xl"
+          >
+            Загрузка опроса…
+          </iframe>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
