@@ -513,12 +513,16 @@
 
         <div id="tab-content-2" class="hidden space-y-4">
           <form action="https://formspree.io/f/mqpaeegj" method="POST" class="space-y-4">
-            <div>
+           <div>
               <h3 class="text-base font-bold text-white mb-1">Опрос дня: Инициативы гимназии</h3>
               <p class="text-xs text-slate-400 mb-4">Выберите наиболее важный пункт. Голосование анонимное.</p>
             </div>
 
-            <div class="space-y-2.5">
+            <div id="poll-already-voted" class="hidden p-4 bg-emerald-500/10 border border-emerald-500/30 rounded-xl text-emerald-400 text-xs text-center font-bold">
+              <i class="fa-solid fa-circle-check mr-1"></i> Вы уже приняли участие в этом опросе. Спасибо!
+            </div>
+
+            <div id="poll-options-list" class="space-y-2.5">
               <label class="flex items-center gap-3 p-3 bg-slate-900/80 border border-slate-700 rounded-xl cursor-pointer hover:border-emerald-500 transition-all">
                 <input type="radio" name="poll_option" value="Вариант 1" class="w-4 h-4 text-emerald-500 focus:ring-emerald-500 bg-slate-800 border-slate-600" required>
                 <span class="text-xs text-slate-200 font-medium">клуб яоя</span>
@@ -535,7 +539,7 @@
               </label>
             </div>
 
-            <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white py-3 rounded-xl font-bold text-xs uppercase tracking-wider transition-all duration-200 shadow-lg flex items-center justify-center gap-2 mt-4">
+            <button id="poll-submit-btn" type="submit" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white py-3 rounded-xl font-bold text-xs uppercase tracking-wider transition-all duration-200 shadow-lg flex items-center justify-center gap-2 mt-4">
               <i class="fa-solid fa-check-to-slot"></i>
               <span>Проголосовать</span>
             </button>
@@ -767,6 +771,25 @@
         alert('Ошибка сети! Проверьте подключение к интернету.');
     }
 });
-    </script>
+   // Проверка и блокировка повторного голосования
+  const pollForm = document.querySelector('#tab-content-2 form');
+  const pollOptionsList = document.getElementById('poll-options-list');
+  const pollSubmitBtn = document.getElementById('poll-submit-btn');
+  const pollAlreadyVoted = document.getElementById('poll-already-voted');
+
+  if (localStorage.getItem('hasVotedInPoll') === 'true') {
+    if (pollOptionsList) pollOptionsList.classList.add('hidden');
+    if (pollSubmitBtn) pollSubmitBtn.classList.add('hidden');
+    if (pollAlreadyVoted) pollAlreadyVoted.classList.remove('hidden');
+  }
+
+  if (pollForm) {
+    pollForm.addEventListener('submit', () => {
+      localStorage.setItem('hasVotedInPoll', 'true');
+    });
+  }
+</script> ```
+
+</script>
 </body>
 </html>
