@@ -783,13 +783,11 @@
     if (pollAlreadyVoted) pollAlreadyVoted.classList.remove('hidden');
   }
 
-  if (pollForm) {
-    pollForm.addEventListener('submit', () => {
-      localStorage.setItem('hasVotedInPoll', 'true');
-    });
-  }
-</script> ```
-
-</script>
-</body>
-</html>
+    if (pollForm) {
+       pollForm.addEventListener('submit', () => {
+          localStorage.setItem('hasVotedInPoll', 'true');
+       });
+    }
+   </script>
+   </body>
+   </html>
