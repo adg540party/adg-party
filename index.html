@@ -724,10 +724,7 @@
             status.classList.remove('text-slate-400');
             status.classList.add('text-emerald-400', 'font-bold');
         }
-        const suggestForm = document.querySelector('#tab-content-1 form');
-
-if (suggestForm) {
-  suggestForm.addEventListener('submit', async (e) => {
+       suggestForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     
     const toast = document.getElementById('form-toast');
