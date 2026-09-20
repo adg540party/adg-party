@@ -648,32 +648,50 @@
 
     <!-- JavaScript Logic -->
     <script>
-        // Mobile Menu Toggle
+    // 1. Глобальная функция переключения вкладок (должна быть первой, чтобы работать по onclick)
+    window.switchTab = function(tabIndex) {
+        var tab1 = document.getElementById('tab-content-1');
+        var tab2 = document.getElementById('tab-content-2');
+        var btn1 = document.getElementById('tab-btn-1');
+        var btn2 = document.getElementById('tab-btn-2');
+
+        if (tabIndex === 1) {
+            if (tab1) tab1.classList.remove('hidden');
+            if (tab2) tab2.classList.add('hidden');
+            if (btn1) btn1.className = 'text-sm font-bold pb-2 border-b-2 border-emerald-400 text-white transition-all focus:outline-none';
+            if (btn2) btn2.className = 'text-sm font-bold pb-2 border-b-2 border-transparent text-slate-400 hover:text-white transition-all focus:outline-none';
+        } else if (tabIndex === 2) {
+            if (tab1) tab1.classList.add('hidden');
+            if (tab2) tab2.classList.remove('hidden');
+            if (btn1) btn1.className = 'text-sm font-bold pb-2 border-b-2 border-transparent text-slate-400 hover:text-white transition-all focus:outline-none';
+            if (btn2) btn2.className = 'text-sm font-bold pb-2 border-b-2 border-emerald-400 text-white transition-all focus:outline-none';
+        }
+    };
+
+    // 2. Вся остальная логика после загрузки страницы
+    document.addEventListener('DOMContentLoaded', () => {
+        // Мобильное меню
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
+        if (mobileMenuBtn && mobileMenu) {
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        }
 
-        mobileMenuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
-
-        // Club Filter Functionality
+        // Фильтры карточек
         const filterBtns = document.querySelectorAll('.filter-btn');
         const clubCards = document.querySelectorAll('.club-card');
-
         filterBtns.forEach(btn => {
             btn.addEventListener('click', () => {
-                // Remove active classes
                 filterBtns.forEach(b => {
                     b.classList.remove('bg-adg-green', 'text-white', 'shadow-sm');
                     b.classList.add('bg-white', 'text-slate-600');
                 });
-
-                // Set active
                 btn.classList.add('bg-adg-green', 'text-white', 'shadow-sm');
                 btn.classList.remove('bg-white', 'text-slate-600');
 
                 const filter = btn.getAttribute('data-filter');
-
                 clubCards.forEach(card => {
                     if (filter === 'all' || card.getAttribute('data-category') === filter) {
                         card.style.display = 'block';
@@ -684,145 +702,76 @@
             });
         });
 
-        // Tab Switching Logic
-  document.addEventListener('DOMContentLoaded', () => {
-    const btnFeedback = document.getElementById('tab-btn-feedback') || document.getElementById('tab-suggest-btn');
-    const btnPoll = document.getElementById('tab-btn-poll') || document.getElementById('tab-poll-btn');
-    
-    const boxFeedback = document.getElementById('feedback-box') || document.getElementById('suggest-form');
-    const boxPoll = document.getElementById('poll-box');
+        // Отправка формы (Formspree)
+        const suggestForm = document.getElementById('suggestForm') || document.querySelector('#tab-content-1 form');
+        if (suggestForm) {
+            suggestForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const toast = document.getElementById('form-toast');
+                const formData = new FormData(suggestForm);
+                const data = Object.fromEntries(formData.entries());
 
-    if (btnFeedback && btnPoll && boxFeedback && boxPoll) {
-      btnFeedback.addEventListener('click', (e) => {
-        e.preventDefault();
-        boxFeedback.classList.remove('hidden');
-        boxPoll.classList.add('hidden');
+                if (!data.message || data.message.trim() === "") {
+                    alert("Пожалуйста, напишите текст обращения.");
+                    return;
+                }
 
-        btnFeedback.className = "text-sm font-bold pb-2 border-b-2 border-emerald-400 text-white transition-all focus:outline-none";
-        btnPoll.className = "text-sm font-bold pb-2 border-b-2 border-transparent text-slate-400 hover:text-white transition-all focus:outline-none";
-      });
+                try {
+                    const response = await fetch(suggestForm.action, {
+                        method: 'POST',
+                        body: JSON.stringify(data),
+                        headers: { 
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json' 
+                        }
+                    });
 
-      btnPoll.addEventListener('click', (e) => {
-        e.preventDefault();
-        boxPoll.classList.remove('hidden');
-        boxFeedback.classList.add('hidden');
-
-        btnPoll.className = "text-sm font-bold pb-2 border-b-2 border-emerald-400 text-white transition-all focus:outline-none";
-        btnPoll.className = "text-sm font-bold pb-2 border-b-2 border-emerald-400 text-white transition-all focus:outline-none";
-      btnFeedback.className = "text-sm font-bold pb-2 border-b-2 border-transparent text-slate-400 hover:text-white transition-all focus:outline-none";
-    });
-  }
-});
-
-        // Poll Voting Simulation
-        let voted = false;
-        function voteOption(optionIndex) {
-            if(voted) return;
-            voted = true;
-            const status = document.getElementById('vote-status');
-            status.textContent = 'Спасибо! Ваш голос учтён.';
-            status.classList.remove('text-slate-400');
-            status.classList.add('text-emerald-400', 'font-bold');
+                    if (response.ok) {
+                        if (toast) {
+                            toast.textContent = 'Сообщение успешно отправлено!';
+                            toast.classList.remove('hidden');
+                            setTimeout(() => toast.classList.add('hidden'), 4000);
+                        } else {
+                            alert('Сообщение успешно отправлено!');
+                        }
+                        suggestForm.reset();
+                    } else {
+                        const errorData = await response.json();
+                        alert('Ошибка Formspree: ' + (errorData.errors ? errorData.errors.map(err => err.message).join(', ') : 'Не удалось отправить'));
+                    }
+                } catch (err) {
+                    alert('Ошибка сети! Проверьте подключение к интернету.');
+                }
+            });
         }
-       suggestForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    
-    const toast = document.getElementById('form-toast');
-    const formData = new FormData(suggestForm);
-    const data = Object.fromEntries(formData.entries());
 
-    // Проверка, что сообщение не пустое
-    if (!data.message || data.message.trim() === "") {
-        alert("Пожалуйста, напишите текст обращения.");
-        return;
-    }
+        // Опрос дня и ограничение повторного голосования
+        function applyPollRestriction() {
+            const pollOptionsList = document.getElementById('poll-options-list');
+            const pollSubmitBtn = document.getElementById('poll-submit-btn');
+            const pollAlreadyVoted = document.getElementById('poll-already-voted');
 
-    try {
-        const response = await fetch(suggestForm.action, {
-            method: 'POST',
-            body: JSON.stringify(data),
-            headers: { 
-                'Content-Type': 'application/json',
-                'Accept': 'application/json' 
+            if (localStorage.getItem('hasVotedInPoll') === 'true') {
+                if (pollOptionsList) pollOptionsList.style.display = 'none';
+                if (pollSubmitBtn) pollSubmitBtn.style.display = 'none';
+                if (pollAlreadyVoted) pollAlreadyVoted.classList.remove('hidden');
+            }
+        }
+
+        applyPollRestriction();
+        window.addEventListener('pageshow', applyPollRestriction);
+
+        document.addEventListener('change', (e) => {
+            if (e.target && e.target.name === 'poll_option') {
+                localStorage.setItem('hasVotedInPoll', 'true');
             }
         });
 
-        if (response.ok) {
-            // Показываем плашку об успешной отправке
-            if (toast) {
-                toast.textContent = 'Сообщение успешно отправлено!';
-                toast.classList.remove('hidden');
-                
-                // Скрываем плашку через 4 секунды
-                setTimeout(() => {
-                    toast.classList.add('hidden');
-                }, 4000);
-            } else {
-                alert('Сообщение успешно отправлено!');
+        document.addEventListener('click', (e) => {
+            if (e.target && e.target.closest('#poll-submit-btn')) {
+                localStorage.setItem('hasVotedInPoll', 'true');
             }
-
-            suggestForm.reset(); // Очищаем форму после отправки
-        } else {
-            const errorData = await response.json();
-            alert('Ошибка Formspree: ' + (errorData.errors ? errorData.errors.map(err => err.message).join(', ') : 'Не удалось отправить'));
-        }
-    } catch (err) {
-        alert('Ошибка сети! Проверьте подключение к интернету.');
-    }
-});
-    function applyPollRestriction() {
-    const pollOptionsList = document.getElementById('poll-options-list');
-    const pollSubmitBtn = document.getElementById('poll-submit-btn');
-    const pollAlreadyVoted = document.getElementById('poll-already-voted');
-
-    if (localStorage.getItem('hasVotedInPoll') === 'true') {
-      if (pollOptionsList) pollOptionsList.style.display = 'none';
-      if (pollSubmitBtn) pollSubmitBtn.style.display = 'none';
-      if (pollAlreadyVoted) pollAlreadyVoted.classList.remove('hidden');
-    }
-  }
-
-  document.addEventListener('DOMContentLoaded', applyPollRestriction);
-  window.addEventListener('pageshow', applyPollRestriction);
-
-  document.addEventListener('change', (e) => {
-    if (e.target && e.target.name === 'poll_option') {
-      localStorage.setItem('hasVotedInPoll', 'true');
-    }
-  });
-
-  document.addEventListener('click', (e) => {
-    if (e.target && e.target.closest('#poll-submit-btn')) {
-      localStorage.setItem('hasVotedInPoll', 'true');
-    }
-  });
-  
-  window.switchTab = function(tabIndex) {
-    var tab1 = document.getElementById('tab-content-1');
-    var tab2 = document.getElementById('tab-content-2');
-    var btn1 = document.getElementById('tab-btn-1');
-    var btn2 = document.getElementById('tab-btn-2');
-
-    if (tabIndex === 1) {
-      if (tab1) tab1.classList.remove('hidden');
-      if (tab2) tab2.classList.add('hidden');
-      if (btn1) {
-        btn1.className = 'text-sm font-bold pb-2 border-b-2 border-emerald-400 text-white transition-all focus:outline-none';
-      }
-      if (btn2) {
-        btn2.className = 'text-sm font-bold pb-2 border-b-2 border-transparent text-slate-400 hover:text-white transition-all focus:outline-none';
-      }
-    } else if (tabIndex === 2) {
-      if (tab1) tab1.classList.add('hidden');
-      if (tab2) tab2.classList.remove('hidden');
-      if (btn2) {
-        btn2.className = 'text-sm font-bold pb-2 border-b-2 border-emerald-400 text-white transition-all focus:outline-none';
-      }
-      if (btn1) {
-        btn1.className = 'text-sm font-bold pb-2 border-b-2 border-transparent text-slate-400 hover:text-white transition-all focus:outline-none';
-      }
-    }
-  };
+        });
+    });
 </script>
-</body>
 </html>
