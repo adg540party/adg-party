@@ -771,29 +771,36 @@
         alert('Ошибка сети! Проверьте подключение к интернету.');
     }
 });
-   // Проверка и блокировка повторного голосования
-const pollForm = document.querySelector('#tab-content-2 form');
-const pollOptionsList = document.getElementById('poll-options-list');
-const pollSubmitBtn = document.getElementById('poll-submit-btn');
-const pollAlreadyVoted = document.getElementById('poll-already-voted');
+  <script>
+  function applyPollRestriction() {
+    const pollOptionsList = document.getElementById('poll-options-list');
+    const pollSubmitBtn = document.getElementById('poll-submit-btn');
+    const pollAlreadyVoted = document.getElementById('poll-already-voted');
 
-// 1. Проверяем при загрузке страницы: если уже голосовал — скрываем форму
-if (localStorage.getItem('hasVotedInPoll') === 'true') {
-  if (pollOptionsList) pollOptionsList.classList.add('hidden');
-  if (pollSubmitBtn) pollSubmitBtn.classList.add('hidden');
-  if (pollAlreadyVoted) pollAlreadyVoted.classList.remove('hidden');
-}
+    // Если метка стоит — принудительно скрываем через inline-стили
+    if (localStorage.getItem('hasVotedInPoll') === 'true') {
+      if (pollOptionsList) pollOptionsList.style.display = 'none';
+      if (pollSubmitBtn) pollSubmitBtn.style.display = 'none';
+      if (pollAlreadyVoted) pollAlreadyVoted.classList.remove('hidden');
+    }
+  }
 
-// 2. Фиксируем клик по кнопке «Проголосовать» ДО отправки формы
-if (pollSubmitBtn) {
-  pollSubmitBtn.addEventListener('click', () => {
-    // Проверяем, выбран ли хоть один вариант
-    const selectedOption = pollForm ? pollForm.querySelector('input[name="poll_option"]:checked') : null;
-    if (selectedOption) {
-      localStorage.setItem('hasVotedInPoll', 'true');
+  // Проверяем при обычной загрузке
+  document.addEventListener('DOMContentLoaded', applyPollRestriction);
+
+  // Проверяем при возврате на страницу из кэша браузера
+  window.addEventListener('pageshow', applyPollRestriction);
+
+  // Записываем клик
+  document.addEventListener('click', (e) => {
+    if (e.target && e.target.closest('#poll-submit-btn')) {
+      const pollForm = document.querySelector('#tab-content-2 form');
+      const selected = pollForm ? pollForm.querySelector('input[name="poll_option"]:checked') : null;
+      if (selected) {
+        localStorage.setItem('hasVotedInPoll', 'true');
+      }
     }
   });
-}
-   </script>
+</script>
    </body>
    </html>
