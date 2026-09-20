@@ -705,17 +705,12 @@
         boxFeedback.classList.add('hidden');
 
         btnPoll.className = "text-sm font-bold pb-2 border-b-2 border-emerald-400 text-white transition-all focus:outline-none";
-        btnFeedback.className = "text-sm font-bold pb-2 border-b-2 border-transparent text-slate-400 hover:text-white transition-all focus:outline-none";
-      });
-    }
-  });
-      }
-      if (btnFeedback) {
-        btnFeedback.classList.add('border-transparent', 'text-slate-400');
-        btnFeedback.classList.remove('border-emerald-400', 'text-white');
-      }
-    }
+        btnPoll.className = "text-sm font-bold pb-2 border-b-2 border-emerald-400 text-white transition-all focus:outline-none";
+      btnFeedback.className = "text-sm font-bold pb-2 border-b-2 border-transparent text-slate-400 hover:text-white transition-all focus:outline-none";
+    });
   }
+});
+
         // Poll Voting Simulation
         let voted = false;
         function voteOption(optionIndex) {
