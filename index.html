@@ -772,22 +772,28 @@
     }
 });
    // Проверка и блокировка повторного голосования
-  const pollForm = document.querySelector('#tab-content-2 form');
-  const pollOptionsList = document.getElementById('poll-options-list');
-  const pollSubmitBtn = document.getElementById('poll-submit-btn');
-  const pollAlreadyVoted = document.getElementById('poll-already-voted');
+const pollForm = document.querySelector('#tab-content-2 form');
+const pollOptionsList = document.getElementById('poll-options-list');
+const pollSubmitBtn = document.getElementById('poll-submit-btn');
+const pollAlreadyVoted = document.getElementById('poll-already-voted');
 
-  if (localStorage.getItem('hasVotedInPoll') === 'true') {
-    if (pollOptionsList) pollOptionsList.classList.add('hidden');
-    if (pollSubmitBtn) pollSubmitBtn.classList.add('hidden');
-    if (pollAlreadyVoted) pollAlreadyVoted.classList.remove('hidden');
-  }
+// 1. Проверяем при загрузке страницы: если уже голосовал — скрываем форму
+if (localStorage.getItem('hasVotedInPoll') === 'true') {
+  if (pollOptionsList) pollOptionsList.classList.add('hidden');
+  if (pollSubmitBtn) pollSubmitBtn.classList.add('hidden');
+  if (pollAlreadyVoted) pollAlreadyVoted.classList.remove('hidden');
+}
 
-    if (pollForm) {
-       pollForm.addEventListener('submit', () => {
-          localStorage.setItem('hasVotedInPoll', 'true');
-       });
+// 2. Фиксируем клик по кнопке «Проголосовать» ДО отправки формы
+if (pollSubmitBtn) {
+  pollSubmitBtn.addEventListener('click', () => {
+    // Проверяем, выбран ли хоть один вариант
+    const selectedOption = pollForm ? pollForm.querySelector('input[name="poll_option"]:checked') : null;
+    if (selectedOption) {
+      localStorage.setItem('hasVotedInPoll', 'true');
     }
+  });
+}
    </script>
    </body>
    </html>
