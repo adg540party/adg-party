@@ -677,31 +677,38 @@
             });
         });
 
-        // Tab Switching for Bot / Poll
-        const tabSuggestBtn = document.getElementById('tab-suggest-btn');
-        const tabPollBtn = document.getElementById('tab-poll-btn');
-        const suggestForm = document.getElementById('suggest-form');
-        const pollBox = document.getElementById('poll-box');
+        function switchTab(tabName) {
+    const feedbackBox = document.getElementById('feedback-box') || document.getElementById('suggest-form');
+    const pollBox = document.getElementById('poll-box');
+    const btnFeedback = document.getElementById('tab-btn-feedback') || document.getElementById('tab-suggest-btn');
+    const btnPoll = document.getElementById('tab-btn-poll') || document.getElementById('tab-poll-btn');
 
-        tabSuggestBtn.addEventListener('click', () => {
-            tabSuggestBtn.classList.add('border-adg-green', 'text-white');
-            tabSuggestBtn.classList.remove('border-transparent', 'text-slate-400');
-            tabPollBtn.classList.remove('border-adg-green', 'text-white');
-            tabPollBtn.classList.add('border-transparent', 'text-slate-400');
+    if (tabName === 'feedback') {
+      if (feedbackBox) feedbackBox.classList.remove('hidden');
+      if (pollBox) pollBox.classList.add('hidden');
+      
+      if (btnFeedback) {
+        btnFeedback.classList.add('border-emerald-400', 'text-white');
+        btnFeedback.classList.remove('border-transparent', 'text-slate-400');
+      }
+      if (btnPoll) {
+        btnPoll.classList.add('border-transparent', 'text-slate-400');
+        btnPoll.classList.remove('border-emerald-400', 'text-white');
+      }
+    } else {
+      if (pollBox) pollBox.classList.remove('hidden');
+      if (feedbackBox) feedbackBox.classList.add('hidden');
 
-            suggestForm.classList.remove('hidden');
-            pollBox.classList.add('hidden');
-        });
-
-        tabPollBtn.addEventListener('click', () => {
-            tabPollBtn.classList.add('border-adg-green', 'text-white');
-            tabPollBtn.classList.remove('border-transparent', 'text-slate-400');
-            tabSuggestBtn.classList.remove('border-adg-green', 'text-white');
-            tabSuggestBtn.classList.add('border-transparent', 'text-slate-400');
-
-            pollBox.classList.remove('hidden');
-            suggestForm.classList.add('hidden');
-        });
+      if (btnPoll) {
+        btnPoll.classList.add('border-emerald-400', 'text-white');
+        btnPoll.classList.remove('border-transparent', 'text-slate-400');
+      }
+      if (btnFeedback) {
+        btnFeedback.classList.add('border-transparent', 'text-slate-400');
+        btnFeedback.classList.remove('border-emerald-400', 'text-white');
+      }
+    }
+  }
         // Poll Voting Simulation
         let voted = false;
         function voteOption(optionIndex) {
