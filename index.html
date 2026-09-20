@@ -474,14 +474,14 @@
         
         <!-- Tabs Header -->
         <div class="flex border-b border-white/10 mb-6 pb-2 gap-4">
-          <button id="tab-btn-feedback" onclick="switchTab('feedback')" class="text-sm font-bold pb-2 border-b-2 border-emerald-400 text-white transition-all focus:outline-none">
+          <button id="tab-btn-feedback" type="button" class="text-sm font-bold pb-2 border-b-2 border-emerald-400 text-white transition-all focus:outline-none">
             <i class="fa-solid fa-pen-to-square mr-1"></i> Написать в приемную
           </button>
-          <button id="tab-btn-poll" onclick="switchTab('poll')" class="text-sm font-bold pb-2 border-b-2 border-transparent text-slate-400 hover:text-white transition-all focus:outline-none">
+          <button id="tab-btn-poll" type="button" class="text-sm font-bold pb-2 border-b-2 border-transparent text-slate-400 hover:text-white transition-all focus:outline-none">
             <i class="fa-solid fa-check-to-slot mr-1"></i> Опрос дня (Демо)
           </button>
         </div>
-
+          
         <!-- Tab 1: Form -->
         <div id="feedback-box" class="space-y-4">
           <form id="suggest-form" class="space-y-4" action="https://formspree.io/f/ВАШ_КОД_FORMSPREE" method="POST">
@@ -677,31 +677,34 @@
             });
         });
 
-        function switchTab(tabName) {
-    const feedbackBox = document.getElementById('feedback-box') || document.getElementById('suggest-form');
-    const pollBox = document.getElementById('poll-box');
+        // Tab Switching Logic
+  document.addEventListener('DOMContentLoaded', () => {
     const btnFeedback = document.getElementById('tab-btn-feedback') || document.getElementById('tab-suggest-btn');
     const btnPoll = document.getElementById('tab-btn-poll') || document.getElementById('tab-poll-btn');
+    
+    const boxFeedback = document.getElementById('feedback-box') || document.getElementById('suggest-form');
+    const boxPoll = document.getElementById('poll-box');
 
-    if (tabName === 'feedback') {
-      if (feedbackBox) feedbackBox.classList.remove('hidden');
-      if (pollBox) pollBox.classList.add('hidden');
-      
-      if (btnFeedback) {
-        btnFeedback.classList.add('border-emerald-400', 'text-white');
-        btnFeedback.classList.remove('border-transparent', 'text-slate-400');
-      }
-      if (btnPoll) {
-        btnPoll.classList.add('border-transparent', 'text-slate-400');
-        btnPoll.classList.remove('border-emerald-400', 'text-white');
-      }
-    } else {
-      if (pollBox) pollBox.classList.remove('hidden');
-      if (feedbackBox) feedbackBox.classList.add('hidden');
+    if (btnFeedback && btnPoll && boxFeedback && boxPoll) {
+      btnFeedback.addEventListener('click', (e) => {
+        e.preventDefault();
+        boxFeedback.classList.remove('hidden');
+        boxPoll.classList.add('hidden');
 
-      if (btnPoll) {
-        btnPoll.classList.add('border-emerald-400', 'text-white');
-        btnPoll.classList.remove('border-transparent', 'text-slate-400');
+        btnFeedback.className = "text-sm font-bold pb-2 border-b-2 border-emerald-400 text-white transition-all focus:outline-none";
+        btnPoll.className = "text-sm font-bold pb-2 border-b-2 border-transparent text-slate-400 hover:text-white transition-all focus:outline-none";
+      });
+
+      btnPoll.addEventListener('click', (e) => {
+        e.preventDefault();
+        boxPoll.classList.remove('hidden');
+        boxFeedback.classList.add('hidden');
+
+        btnPoll.className = "text-sm font-bold pb-2 border-b-2 border-emerald-400 text-white transition-all focus:outline-none";
+        btnFeedback.className = "text-sm font-bold pb-2 border-b-2 border-transparent text-slate-400 hover:text-white transition-all focus:outline-none";
+      });
+    }
+  });
       }
       if (btnFeedback) {
         btnFeedback.classList.add('border-transparent', 'text-slate-400');
