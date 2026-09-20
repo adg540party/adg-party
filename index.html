@@ -73,16 +73,15 @@
                 <a href="#about" class="hover:text-adg-green transition-colors">О нас</a>
                 <a href="#ideas" class="hover:text-adg-green transition-colors">Идеи и Парламент</a>
                 <a href="#clubs" class="hover:text-adg-green transition-colors">Кружки & Инициативы</a>
-                <a href="#bot" class="hover:text-adg-green transition-colors">Приемная & Опросы</a>
+                <a href="#bot" onclick="switchTab(1)" class="hover:text-adg-green transition-colors">Приемная & Опросы</a>
                 <a href="#groups" class="hover:text-adg-green transition-colors">Инициативная группа</a>
             </nav>
 
             <!-- Action Button -->
-            <div class="hidden md:flex items-center gap-3">
-                <a href="#bot" class="bg-adg-green hover:bg-adg-greenDark text-white px-5 py-2.5 rounded-xl font-semibold text-sm transition-all shadow-md hover:shadow-lg flex items-center gap-2">
-                    <i class="fa-paper-plane text-xs"></i>
-                    <span>Предложить идею</span>
-                </a>
+            <a href="#bot" onclick="switchTab(1)" class="bg-adg-green hover:bg-adg-greenDark text-white px-5 py-2.5 rounded-xl font-semibold text-sm transition-all shadow-md hover:shadow-lg flex items-center gap-2">
+  <i class="fa-paper-plane text-xs"></i>
+  <span>Предложить идею</span>
+</a>
             </div>
 
             <!-- Mobile Menu Toggle Button -->
@@ -470,27 +469,27 @@
       </div>
 
 <!-- Right Column Interactive Widget -->
-     <div class="lg:col-span-7 bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/10 shadow-2xl">
+     <div id="bot" class="scroll-mt-20 lg:col-span-7 bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/10 shadow-2xl">
         
         <div class="flex border-b border-white/10 mb-6 pb-2 gap-4">
           <button 
             type="button" 
             id="tab-btn-1"
-            onclick="document.getElementById('tab-content-1').classList.remove('hidden'); document.getElementById('tab-content-2').classList.add('hidden'); this.className='text-sm font-bold pb-2 border-b-2 border-emerald-400 text-white transition-all focus:outline-none'; document.getElementById('tab-btn-2').className='text-sm font-bold pb-2 border-b-2 border-transparent text-slate-400 hover:text-white transition-all focus:outline-none';" 
+            onclick="switchTab(1)" 
             class="text-sm font-bold pb-2 border-b-2 border-emerald-400 text-white transition-all focus:outline-none">
             <i class="fa-solid fa-pen-to-square mr-1"></i> Написать в приемную
           </button>
           <button 
             type="button" 
             id="tab-btn-2"
-            onclick="document.getElementById('tab-content-2').classList.remove('hidden'); document.getElementById('tab-content-1').classList.add('hidden'); this.className='text-sm font-bold pb-2 border-b-2 border-emerald-400 text-white transition-all focus:outline-none'; document.getElementById('tab-btn-1').className='text-sm font-bold pb-2 border-b-2 border-transparent text-slate-400 hover:text-white transition-all focus:outline-none';" 
+            onclick="switchTab(2)"
             class="text-sm font-bold pb-2 border-b-2 border-transparent text-slate-400 hover:text-white transition-all focus:outline-none">
             <i class="fa-solid fa-check-to-slot mr-1"></i> Опрос дня (Демо)
           </button>
         </div>
 
         <div id="tab-content-1" class="space-y-4">
-          <form class="space-y-4" action="https://formspree.io/f/ВАШ_КОД" method="POST">
+          <form class="space-y-4" action="https://formspree.io/f/mqpaeegj" method="POST">
             <div>
               <label class="block text-xs font-semibold text-slate-300 mb-1">Категория обращения</label>
               <select name="category" class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl px-4 py-2.5 text-xs focus:ring-2 focus:ring-emerald-500 focus:outline-none">
