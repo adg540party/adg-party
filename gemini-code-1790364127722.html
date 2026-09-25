@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Занятия — АдГ</title>
+    <!-- Подключаем Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'adg-green': '#10B981',
+                        'adg-greenDark': '#059669',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans">
+
+    <!-- Шапка сайта (меню) -->
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="index.html" class="font-bold text-xl text-slate-900">АдГ</a>
+            <nav class="hidden md:flex items-center gap-8 font-medium text-slate-600">
+                <a href="index.html#about" class="hover:text-adg-green transition-colors">О нас</a>
+                <a href="index.html#ideas" class="hover:text-adg-green transition-colors">Идеи и Парламент</a>
+                <a href="classes.html" class="text-adg-green font-bold">Занятия</a>
+                <a href="index.html#bot" class="hover:text-adg-green transition-colors">Приемная & Опросник</a>
+                <a href="index.html#groups" class="hover:text-adg-green transition-colors">Инициативная группа</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Основной контент страницы «Занятия» -->
+    <main class="max-w-6xl mx-auto px-4 py-12">
+        <h1 class="text-3xl font-bold mb-2">Занятия и кружки</h1>
+        <p class="text-slate-600 mb-8">Выберите интересующее вас направление:</p>
+
+        <!-- Кнопки фильтрации (Все + 4 конкретных направления) -->
+        <div class="flex flex-wrap gap-3 mb-8">
+            <button class="filter-btn bg-adg-green text-white px-4 py-2 rounded-xl text-sm font-semibold shadow-sm transition-all" data-filter="all">Все</button>
+            <button class="filter-btn bg-white text-slate-600 px-4 py-2 rounded-xl text-sm font-semibold border border-slate-200 hover:bg-slate-100 transition-all" data-filter="sport">Спорт</button>
+            <button class="filter-btn bg-white text-slate-600 px-4 py-2 rounded-xl text-sm font-semibold border border-slate-200 hover:bg-slate-100 transition-all" data-filter="programming">Программирование</button>
+            <button class="filter-btn bg-white text-slate-600 px-4 py-2 rounded-xl text-sm font-semibold border border-slate-200 hover:bg-slate-100 transition-all" data-filter="acting">Актёрское мастерство</button>
+            <button class="filter-btn bg-white text-slate-600 px-4 py-2 rounded-xl text-sm font-semibold border border-slate-200 hover:bg-slate-100 transition-all" data-filter="creativity">Творчество</button>
+        </div>
+
+        <!-- Сетка карточек с заглушками -->
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- Карточка: Спорт -->
+            <div class="club-card bg-white p-6 rounded-2xl shadow-sm border border-slate-200 text-center" data-category="sport">
+                <span class="inline-block bg-emerald-100 text-adg-green text-xs px-2.5 py-1 rounded-lg font-bold mb-3">Спорт</span>
+                <h3 class="font-bold text-base mb-2">Спортивные секции</h3>
+                <p class="text-sm text-slate-400 py-4">Занятий пока нет</p>
+            </div>
+
+            <!-- Карточка: Программирование -->
+            <div class="club-card bg-white p-6 rounded-2xl shadow-sm border border-slate-200 text-center" data-category="programming">
+                <span class="inline-block bg-blue-100 text-blue-600 text-xs px-2.5 py-1 rounded-lg font-bold mb-3">Программирование</span>
+                <h3 class="font-bold text-base mb-2">Клубы по кодингу</h3>
+                <p class="text-sm text-slate-400 py-4">Занятий пока нет</p>
+            </div>
+
+            <!-- Карточка: Актёрское мастерство -->
+            <div class="club-card bg-white p-6 rounded-2xl shadow-sm border border-slate-200 text-center" data-category="acting">
+                <span class="inline-block bg-amber-100 text-amber-600 text-xs px-2.5 py-1 rounded-lg font-bold mb-3">Актёрское мастерство</span>
+                <h3 class="font-bold text-base mb-2">Театральная студия</h3>
+                <p class="text-sm text-slate-400 py-4">Занятий пока нет</p>
+            </div>
+
+            <!-- Карточка: Творчество -->
+            <div class="club-card bg-white p-6 rounded-2xl shadow-sm border border-slate-200 text-center" data-category="creativity">
+                <span class="inline-block bg-purple-100 text-purple-600 text-xs px-2.5 py-1 rounded-lg font-bold mb-3">Творчество</span>
+                <h3 class="font-bold text-base mb-2">Кружки и хобби</h3>
+                <p class="text-sm text-slate-400 py-4">Занятий пока нет</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Подвал -->
+    <footer class="bg-white border-t border-slate-200 py-6 text-center text-sm text-slate-500 mt-12">
+        <p>© 2026 АдГ. Все права защищены.</p>
+    </footer>
+
+    <!-- Скрипт фильтрации -->
+    <script>
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const clubCards = document.querySelectorAll('.club-card');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => {
+                    b.classList.remove('bg-adg-green', 'text-white', 'shadow-sm');
+                    b.classList.add('bg-white', 'text-slate-600', 'border', 'border-slate-200');
+                });
+                btn.classList.add('bg-adg-green', 'text-white', 'shadow-sm');
+                btn.classList.remove('bg-white', 'text-slate-600', 'border', 'border-slate-200');
+
+                const filter = btn.getAttribute('data-filter');
+                clubCards.forEach(card => {
+                    if (filter === 'all' || card.getAttribute('data-category') === filter) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
