@@ -1,38 +1,49 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Занятия — АдГ</title>
-    <!-- Подключаем Tailwind CSS -->
+    <title>Занятия и кружки — АдГ</title>
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        'adg-green': '#008751',
-                        'adg-greenDark': '005c36',
+                        adg: {
+                            green: '#008751',
+                            greenDark: '#005c36',
+                            greenLight: '#e6f4ed',
+                            red: '#e53935',
+                            redhover: '#c62828',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
                     }
                 }
             }
         }
     </script>
 </head>
-<body class="bg-slate-50 text-slate-800 font-sans">
+<body class="bg-slate-50 text-slate-800 font-sans antialiased flex flex-col min-h-screen">
 
-    <!-- Шапка сайта (меню) -->
-    <header class="bg-white border-b border-slate-200 sticky top-0 z-50">
-        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+    <!-- Header -->
+    <header class="sticky top-0 z-50 bg-white border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
             <a href="index.html" class="flex items-center">
-    <img src="logo.jpg" alt="АдГ Логотип" class="h-10 w-auto">
-                <div class="hidden sm:flex flex-col border-l border-slate-200 pl-3">
-                    <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Партия</span>
-                    <span class="text-xs font-extrabold text-adg-green tracking-wide uppercase">Альтернатива для Гимназии</span>
-                </div>
+                <img src="logo.png" alt="АдГ Логотип" class="h-10 w-auto">
             </a>
-            <nav class="hidden md:flex items-center gap-8 font-medium text-slate-600">
+            
+            <nav class="hidden md:flex items-center gap-8 font-medium text-sm text-slate-600">
                 <a href="index.html#about" class="hover:text-adg-green transition-colors">О нас</a>
                 <a href="index.html#ideas" class="hover:text-adg-green transition-colors">Идеи и Парламент</a>
                 <a href="classes.html" class="text-adg-green font-bold">Занятия</a>
@@ -42,81 +53,43 @@
         </div>
     </header>
 
-    <!-- Основной контент страницы «Занятия» -->
-    <main class="max-w-6xl mx-auto px-4 py-12">
-         <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight leading-none">Занятия и кружки</h1>
-        <p class="text-slate-600 mb-12">Выберите интересующее вас направление:</p>
+    <!-- Main Content -->
+    <main class="max-w-6xl mx-auto px-4 py-12 flex-grow">
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-none mb-6">Занятия и кружки</h1>
+        <p class="text-slate-600 mb-12 text-lg">Выберите интересующее вас направление:</p>
 
-        <!-- Кнопки фильтрации (Все + 4 конкретных направления) -->
-        <div class="flex flex-wrap gap-3 mb-8">
-            <button class="filter-btn bg-adg-green text-white px-4 py-2 rounded-xl text-sm font-semibold shadow-sm transition-all" data-filter="all">Все</button>
-            <button class="filter-btn bg-white text-slate-600 px-4 py-2 rounded-xl text-sm font-semibold border border-slate-200 hover:bg-slate-100 transition-all" data-filter="sport">Спорт</button>
-            <button class="filter-btn bg-white text-slate-600 px-4 py-2 rounded-xl text-sm font-semibold border border-slate-200 hover:bg-slate-100 transition-all" data-filter="programming">Программирование</button>
-            <button class="filter-btn bg-white text-slate-600 px-4 py-2 rounded-xl text-sm font-semibold border border-slate-200 hover:bg-slate-100 transition-all" data-filter="acting">Актёрское мастерство</button>
-            <button class="filter-btn bg-white text-slate-600 px-4 py-2 rounded-xl text-sm font-semibold border border-slate-200 hover:bg-slate-100 transition-all" data-filter="creativity">Творчество</button>
+        <!-- Кнопки фильтрации -->
+        <div class="flex flex-wrap gap-3 mb-16">
+            <button onclick="filterCategory('all')" class="filter-btn bg-adg-green text-white px-6 py-2.5 rounded-xl text-sm font-semibold shadow-sm transition-all" data-filter="all">Все</button>
+            <button onclick="filterCategory('sport')" class="filter-btn bg-white text-slate-600 px-6 py-2.5 rounded-xl text-sm font-semibold border border-slate-200 hover:bg-slate-100 transition-all" data-filter="sport">Спорт</button>
+            <button onclick="filterCategory('programming')" class="filter-btn bg-white text-slate-600 px-6 py-2.5 rounded-xl text-sm font-semibold border border-slate-200 hover:bg-slate-100 transition-all" data-filter="programming">Программирование</button>
+            <button onclick="filterCategory('acting')" class="filter-btn bg-white text-slate-600 px-6 py-2.5 rounded-xl text-sm font-semibold border border-slate-200 hover:bg-slate-100 transition-all" data-filter="acting">Актёрское мастерство</button>
+            <button onclick="filterCategory('creativity')" class="filter-btn bg-white text-slate-600 px-6 py-2.5 rounded-xl text-sm font-semibold border border-slate-200 hover:bg-slate-100 transition-all" data-filter="creativity">Творчество</button>
         </div>
 
-        <!-- Сетка карточек с заглушками -->
-        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <!-- Карточка: Спорт -->
-            <div class="club-card bg-white p-6 rounded-2xl shadow-sm border border-slate-200 text-center" data-category="sport">
-                <span class="inline-block bg-emerald-100 text-adg-green text-xs px-2.5 py-1 rounded-lg font-bold mb-3">Спорт</span>
-                <h3 class="font-bold text-base mb-2">Спортивные секции</h3>
-                <p class="text-sm text-slate-400 py-4">Занятий пока нет</p>
-            </div>
-
-            <!-- Карточка: Программирование -->
-            <div class="club-card bg-white p-6 rounded-2xl shadow-sm border border-slate-200 text-center" data-category="programming">
-                <span class="inline-block bg-blue-100 text-blue-600 text-xs px-2.5 py-1 rounded-lg font-bold mb-3">Программирование</span>
-                <h3 class="font-bold text-base mb-2">Клубы по кодингу</h3>
-                <p class="text-sm text-slate-400 py-4">Занятий пока нет</p>
-            </div>
-
-            <!-- Карточка: Актёрское мастерство -->
-            <div class="club-card bg-white p-6 rounded-2xl shadow-sm border border-slate-200 text-center" data-category="acting">
-                <span class="inline-block bg-amber-100 text-amber-600 text-xs px-2.5 py-1 rounded-lg font-bold mb-3">Актёрское мастерство</span>
-                <h3 class="font-bold text-base mb-2">Театральная студия</h3>
-                <p class="text-sm text-slate-400 py-4">Занятий пока нет</p>
-            </div>
-
-            <!-- Карточка: Творчество -->
-            <div class="club-card bg-white p-6 rounded-2xl shadow-sm border border-slate-200 text-center" data-category="creativity">
-                <span class="inline-block bg-purple-100 text-purple-600 text-xs px-2.5 py-1 rounded-lg font-bold mb-3">Творчество</span>
-                <h3 class="font-bold text-base mb-2">Кружки и хобби</h3>
-                <p class="text-sm text-slate-400 py-4">Занятий пока нет</p>
-            </div>
+        <!-- Контент: Просто текст «Занятий пока нет» с поддержкой фильтров -->
+        <div id="no-classes-message" class="text-center py-20">
+            <p class="text-2xl sm:text-3xl font-semibold text-slate-400">Занятий пока нет</p>
         </div>
     </main>
 
-    <!-- Подвал -->
-    <footer class="bg-white border-t border-slate-200 py-6 text-center text-sm text-slate-500 mt-12">
-        <p>© 2026 АдГ. Все права защищены.</p>
+    <!-- Footer -->
+    <footer class="bg-white border-t border-slate-200 py-6 text-center text-sm text-slate-500">
+        <p>&copy; 2026 АдГ. Все права защищены.</p>
     </footer>
 
-    <!-- Скрипт фильтрации -->
     <script>
-        const filterBtns = document.querySelectorAll('.filter-btn');
-        const clubCards = document.querySelectorAll('.club-card');
-
-        filterBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                filterBtns.forEach(b => {
-                    b.classList.remove('bg-adg-green', 'text-white', 'shadow-sm');
-                    b.classList.add('bg-white', 'text-slate-600', 'border', 'border-slate-200');
-                });
-                btn.classList.add('bg-adg-green', 'text-white', 'shadow-sm');
-                btn.classList.remove('bg-white', 'text-slate-600', 'border', 'border-slate-200');
-
-                const filter = btn.getAttribute('data-filter');
-                clubCards.forEach(card => {
-                    if (filter === 'all' || card.getAttribute('data-category') === filter) {
-                        card.style.display = 'block';
-                    } else {
-                        card.style.display = 'none';
-                    }
-                });
+        function filterCategory(category) {
+            // Подсветка активной кнопки
+            const buttons = document.querySelectorAll('.filter-btn');
+            buttons.forEach(btn => {
+                if (btn.getAttribute('data-filter') === category) {
+                    btn.className = "filter-btn bg-adg-green text-white px-6 py-2.5 rounded-xl text-sm font-semibold shadow-sm transition-all";
+                } else {
+                    btn.className = "filter-btn bg-white text-slate-600 px-6 py-2.5 rounded-xl text-sm font-semibold border border-slate-200 hover:bg-slate-100 transition-all";
+                }
             });
-        });
+        }
     </script>
 </body>
 </html>
