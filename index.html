@@ -183,7 +183,128 @@
         </div>
     </section>
 
-    <!-- Ideas & Program Section -->
+    <!-- Reception & Polls Section -->
+<section id="reception" class="py-16 bg-slate-900 border-t border-slate-800">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid lg:grid-cols-12 gap-8 items-start">
+      
+      <!-- Left Column Info -->
+      <div class="lg:col-span-5 space-y-6">
+        <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight leading-tight text-white">
+          Анонимный бот и Школьные Референдумы
+        </h2>
+        <p class="text-slate-300 text-sm leading-relaxed">
+          У вас есть идеи, предложения по новому кружку, или вы хотите высказать жалобу? Воспользуйтесь нашей онлайн-приемной. Все обращения рассматриваются инициативной группой.
+        </p>
+        <div class="space-y-3 pt-2">
+          <div class="flex items-center gap-3 text-xs text-slate-300">
+            <i class="fa-solid fa-shield-halved text-adg-green text-lg"></i>
+            <span>Полная анонимность отправки</span>
+          </div>
+          <div class="flex items-center gap-3 text-xs text-slate-300">
+            <i class="fa-solid fa-square-poll-vertical text-red-400 text-lg"></i>
+            <span>Голосования выносятся на экраны гимназии</span>
+          </div>
+        </div>
+      </div>
+
+<!-- Right Column Interactive Widget -->
+     <div id="bot" class="scroll-mt-20 lg:col-span-7 bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/10 shadow-2xl">
+        
+        <div class="flex border-b border-white/10 mb-6 pb-2 gap-4">
+          <button 
+            type="button" 
+            id="tab-btn-1"
+            onclick="switchTab(1)" 
+            class="text-sm font-bold pb-2 border-b-2 border-adg-green text-white transition-all focus:outline-none">
+            <i class="fa-solid fa-pen-to-square mr-1"></i> Написать в приемную
+          </button>
+          <button 
+            type="button" 
+            id="tab-btn-2"
+            onclick="switchTab(2)"
+            class="text-sm font-bold pb-2 border-b-2 border-transparent text-slate-400 hover:text-white transition-all focus:outline-none">
+            <i class="fa-solid fa-check-to-slot mr-1"></i> Опрос дня
+          </button>
+        </div>
+
+        <div id="tab-content-1" class="space-y-4">
+          <form class="space-y-4" action="https://formspree.io/f/mqpaeegj" method="POST">
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1">Категория обращения</label>
+              <select name="category" class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl px-4 py-2.5 text-xs focus:ring-2 focus:ring-adg-green focus:outline-none">
+                <option value="Предложить вариант кружка">Пожелание/Жалоба</option>
+                <option value="Жалоба / Пожелание">Предложить идею</option>
+                <option value="Академическая помощь">Академическая помощь</option>
+                <option value="Предложение для референдума">Предложение для референдума</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Ваше сообщение / Идея</label>
+              <textarea name="message" rows="4" placeholder="Опишите вашу идею или вопрос подробнее..." required class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500"></textarea>
+            </div>
+            <button type="submit" class="w-full bg-adg-green hover:bg-adg-greenDark text-white py-3 rounded-xl font-bold text-xs uppercase tracking-wider transition-all duration-200 shadow-lg flex items-center justify-center gap-2">
+              <i class="fa-solid fa-paper-plane"></i>
+              <span>Отправить анонимно</span>
+            </button>
+          </form>
+        </div>
+
+        <div id="tab-content-2" class="hidden space-y-4">
+          <form action="https://formspree.io/f/mqpaeegj" method="POST" class="space-y-4">
+           <div>
+              <h3 class="text-base font-bold text-white mb-1">Опрос дня: Инициативы гимназии</h3>
+              <p class="text-xs text-slate-400 mb-4">Выберите наиболее важный пункт. Голосование анонимное.</p>
+            </div>
+
+            <div id="poll-already-voted" class="hidden p-4 bg-emerald-500/10 border border-emerald-500/30 rounded-xl text-emerald-400 text-xs text-center font-bold">
+              <i class="fa-solid fa-circle-check mr-1"></i> Вы уже приняли участие в этом опросе. Спасибо!
+            </div>
+
+            <div id="poll-options-list" class="space-y-2.5">
+              <label class="flex items-center gap-3 p-3 bg-slate-900/80 border border-slate-700 rounded-xl cursor-pointer hover:border-emerald-500 transition-all">
+                <input type="radio" name="poll_option" value="Вариант 1" class="w-4 h-4 text-emerald-500 focus:ring-emerald-500 bg-slate-800 border-slate-600" required>
+                <span class="text-xs text-slate-200 font-medium">А</span>
+              </label>
+
+              <label class="flex items-center gap-3 p-3 bg-slate-900/80 border border-slate-700 rounded-xl cursor-pointer hover:border-emerald-500 transition-all">
+                <input type="radio" name="poll_option" value="Вариант 2" class="w-4 h-4 text-emerald-500 focus:ring-emerald-500 bg-slate-800 border-slate-600">
+                <span class="text-xs text-slate-200 font-medium">Б</span>
+              </label>
+
+              <label class="flex items-center gap-3 p-3 bg-slate-900/80 border border-slate-700 rounded-xl cursor-pointer hover:border-emerald-500 transition-all">
+                <input type="radio" name="poll_option" value="Вариант 3" class="w-4 h-4 text-emerald-500 focus:ring-emerald-500 bg-slate-800 border-slate-600">
+                <span class="text-xs text-slate-200 font-medium">В</span>
+              </label>
+            </div>
+
+            <button id="poll-submit-btn" type="submit" onclick="localStorage.setItem('hasVotedInPoll', 'true')" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white py-3 rounded-xl font-bold text-xs uppercase tracking-wider transition-all duration-200 shadow-lg flex items-center justify-center gap-2 mt-4">
+              <i class="fa-solid fa-check-to-slot"></i>
+              <span>Проголосовать</span>
+            </button>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+    <!-- Join Us Callout Banner -->
+<section id="join-us" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="bg-emerald-50 rounded-2xl p-8 border border-emerald-200 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-sm">
+        <div class="space-y-1 text-center sm:text-left">
+            <h4 class="text-lg font-bold text-slate-900">Хочешь войти в Инициативную Группу АдГ?</h4>
+            <p class="text-xs text-slate-600">Мы принимаем всех, кто хочет улучшить жизнь нашей гимназии!</p>
+        </div>
+        <a href="https://forms.gle/DJDz6uZYkAd46KS56" target="_blank" class="whitespace-nowrap px-6 py-3 bg-adg-green hover:bg-adg-greenDark text-white font-bold rounded-xl text-xs transition-all shadow-md">
+            Вступить в группу
+        </a>
+    </div>
+</section>
+
+
+     <!-- Ideas & Program Section -->
     <section id="ideas" class="py-20 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center max-w-3xl mx-auto mb-16">
@@ -323,113 +444,6 @@
             </div>
         </div>
     </section>
-
- <!-- Reception & Polls Section -->
-<section id="reception" class="py-16 bg-slate-900 border-t border-slate-800">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="grid lg:grid-cols-12 gap-8 items-start">
-      
-      <!-- Left Column Info -->
-      <div class="lg:col-span-5 space-y-6">
-        <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight leading-tight text-white">
-          Анонимный бот и Школьные Референдумы
-        </h2>
-        <p class="text-slate-300 text-sm leading-relaxed">
-          У вас есть идеи, предложения по новому кружку, или вы хотите высказать жалобу? Воспользуйтесь нашей онлайн-приемной. Все обращения рассматриваются инициативной группой.
-        </p>
-        <div class="space-y-3 pt-2">
-          <div class="flex items-center gap-3 text-xs text-slate-300">
-            <i class="fa-solid fa-shield-halved text-adg-green text-lg"></i>
-            <span>Полная анонимность отправки</span>
-          </div>
-          <div class="flex items-center gap-3 text-xs text-slate-300">
-            <i class="fa-solid fa-square-poll-vertical text-red-400 text-lg"></i>
-            <span>Голосования выносятся на экраны гимназии</span>
-          </div>
-        </div>
-      </div>
-
-<!-- Right Column Interactive Widget -->
-     <div id="bot" class="scroll-mt-20 lg:col-span-7 bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/10 shadow-2xl">
-        
-        <div class="flex border-b border-white/10 mb-6 pb-2 gap-4">
-          <button 
-            type="button" 
-            id="tab-btn-1"
-            onclick="switchTab(1)" 
-            class="text-sm font-bold pb-2 border-b-2 border-adg-green text-white transition-all focus:outline-none">
-            <i class="fa-solid fa-pen-to-square mr-1"></i> Написать в приемную
-          </button>
-          <button 
-            type="button" 
-            id="tab-btn-2"
-            onclick="switchTab(2)"
-            class="text-sm font-bold pb-2 border-b-2 border-transparent text-slate-400 hover:text-white transition-all focus:outline-none">
-            <i class="fa-solid fa-check-to-slot mr-1"></i> Опрос дня
-          </button>
-        </div>
-
-        <div id="tab-content-1" class="space-y-4">
-          <form class="space-y-4" action="https://formspree.io/f/mqpaeegj" method="POST">
-            <div>
-              <label class="block text-xs font-semibold text-slate-300 mb-1">Категория обращения</label>
-              <select name="category" class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl px-4 py-2.5 text-xs focus:ring-2 focus:ring-adg-green focus:outline-none">
-                <option value="Предложить вариант кружка">Предложить вариант кружка</option>
-                <option value="Жалоба / Пожелание">Жалоба / Пожелание</option>
-                <option value="Академическая помощь">Академическая помощь</option>
-                <option value="Предложение для референдума">Предложение для референдума</option>
-              </select>
-            </div>
-            <div>
-              <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Ваше сообщение / Идея</label>
-              <textarea name="message" rows="4" placeholder="Опишите вашу идею или вопрос подробнее..." required class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500"></textarea>
-            </div>
-            <button type="submit" class="w-full bg-adg-green hover:bg-adg-greenDark text-white py-3 rounded-xl font-bold text-xs uppercase tracking-wider transition-all duration-200 shadow-lg flex items-center justify-center gap-2">
-              <i class="fa-solid fa-paper-plane"></i>
-              <span>Отправить анонимно</span>
-            </button>
-          </form>
-        </div>
-
-        <div id="tab-content-2" class="hidden space-y-4">
-          <form action="https://formspree.io/f/mqpaeegj" method="POST" class="space-y-4">
-           <div>
-              <h3 class="text-base font-bold text-white mb-1">Опрос дня: Инициативы гимназии</h3>
-              <p class="text-xs text-slate-400 mb-4">Выберите наиболее важный пункт. Голосование анонимное.</p>
-            </div>
-
-            <div id="poll-already-voted" class="hidden p-4 bg-emerald-500/10 border border-emerald-500/30 rounded-xl text-emerald-400 text-xs text-center font-bold">
-              <i class="fa-solid fa-circle-check mr-1"></i> Вы уже приняли участие в этом опросе. Спасибо!
-            </div>
-
-            <div id="poll-options-list" class="space-y-2.5">
-              <label class="flex items-center gap-3 p-3 bg-slate-900/80 border border-slate-700 rounded-xl cursor-pointer hover:border-emerald-500 transition-all">
-                <input type="radio" name="poll_option" value="Вариант 1" class="w-4 h-4 text-emerald-500 focus:ring-emerald-500 bg-slate-800 border-slate-600" required>
-                <span class="text-xs text-slate-200 font-medium">А</span>
-              </label>
-
-              <label class="flex items-center gap-3 p-3 bg-slate-900/80 border border-slate-700 rounded-xl cursor-pointer hover:border-emerald-500 transition-all">
-                <input type="radio" name="poll_option" value="Вариант 2" class="w-4 h-4 text-emerald-500 focus:ring-emerald-500 bg-slate-800 border-slate-600">
-                <span class="text-xs text-slate-200 font-medium">Б</span>
-              </label>
-
-              <label class="flex items-center gap-3 p-3 bg-slate-900/80 border border-slate-700 rounded-xl cursor-pointer hover:border-emerald-500 transition-all">
-                <input type="radio" name="poll_option" value="Вариант 3" class="w-4 h-4 text-emerald-500 focus:ring-emerald-500 bg-slate-800 border-slate-600">
-                <span class="text-xs text-slate-200 font-medium">В</span>
-              </label>
-            </div>
-
-            <button id="poll-submit-btn" type="submit" onclick="localStorage.setItem('hasVotedInPoll', 'true')" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white py-3 rounded-xl font-bold text-xs uppercase tracking-wider transition-all duration-200 shadow-lg flex items-center justify-center gap-2 mt-4">
-              <i class="fa-solid fa-check-to-slot"></i>
-              <span>Проголосовать</span>
-            </button>
-          </form>
-        </div>
-
-      </div>
-    </div>
-  </div>
-</section>
     
      <!-- Секция-переход на страницу занятий -->
 <section id="classes-banner" class="w-full px-4 sm:px-6 lg:px-8 py-12">
@@ -446,19 +460,6 @@
                 <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
             </a>
         </div>
-    </div>
-</section>
-
-            <!-- Join Us Callout Banner -->
-<section id="join-us" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-    <div class="bg-emerald-50 rounded-2xl p-8 border border-emerald-200 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-sm">
-        <div class="space-y-1 text-center sm:text-left">
-            <h4 class="text-lg font-bold text-slate-900">Хочешь войти в Инициативную Группу АдГ?</h4>
-            <p class="text-xs text-slate-600">Мы принимаем всех, кто хочет улучшить жизнь нашей гимназии!</p>
-        </div>
-        <a href="https://forms.gle/DJDz6uZYkAd46KS56" target="_blank" class="whitespace-nowrap px-6 py-3 bg-adg-green hover:bg-adg-greenDark text-white font-bold rounded-xl text-xs transition-all shadow-md">
-            Вступить в группу
-        </a>
     </div>
 </section>
 
