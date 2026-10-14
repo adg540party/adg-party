@@ -27,31 +27,51 @@
 </head>
 <body class="bg-slate-50 font-sans text-slate-800 antialiased min-h-screen flex flex-col">
 
-    <!-- Header / Navbar (Точно как в index.html) -->
-    <header class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200">
+     <!-- Navigation Bar -->
+    <header class="bg-white border-b border-slate-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-            <a href="index.html" class="flex items-center gap-3">
-                <div class="font-black text-2xl tracking-tighter text-adg-green">
-                    АдГ<span class="text-adg-red">.</span>
-                </div>
-                <div class="hidden sm:block border-l border-slate-200 pl-3">
-                    <div class="text-[10px] uppercase tracking-wider text-slate-400 font-bold">Партия</div>
-                    <div class="text-xs font-bold text-slate-700">Альтернатива для Гимназии</div>
+            <!-- Brand Logo -->
+            <a href="index.html" class="flex items-center">
+    <img src="logo.jpg" alt="АдГ Логотип" class="h-10 w-auto">
+                <div class="hidden sm:flex flex-col border-l border-slate-200 pl-3">
+                    <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Партия</span>
+                    <span class="text-xs font-extrabold text-adg-green tracking-wide uppercase">Альтернатива для Гимназии</span>
                 </div>
             </a>
-            <nav class="hidden md:flex items-center gap-8 text-sm font-semibold text-slate-600">
-                <a href="index.html#about" class="hover:text-adg-green transition-colors">О нас</a>
-                <a href="index.html#ideas" class="hover:text-adg-green transition-colors">Идеи и Парламент</a>
-                <a href="index.html#bot" class="hover:text-adg-green transition-colors">Приемная & Опросы</a>
-                <a href="classes.html" class="hover:text-adg-green transition-colors">Занятия</a>
+
+            <!-- Desktop Menu -->
+            <nav class="hidden md:flex items-center gap-8 font-medium text-sm text-slate-600">
+                <a href="#about" class="hover:text-adg-green transition-colors">О нас</a>
+                <a href="#ideas" class="hover:text-adg-green transition-colors">Идеи и Парламент</a>
+                <a href="#bot" onclick="switchTab(1)" class="hover:text-adg-green transition-colors">Приемная & Опросы</a>
+                <a href="#classes-banner" class="hover:text-adg-green transition-colors">Занятия</a>
             </nav>
-            <div>
-                <a href="https://forms.gle/DJDz6uZYkAd46KS56" target="_blank" class="px-5 py-2.5 bg-adg-green hover:bg-adg-greenDark text-white font-bold rounded-xl text-xs transition-all shadow-md">
-                    <i class="fa-solid fa-paper-plane mr-1.5"></i> Предложить идею
-                </a>
+
+            <!-- Action Button -->
+            <a href="#bot" onclick="switchTab(1)" class="bg-adg-green hover:bg-adg-greenDark text-white px-5 py-2.5 rounded-xl font-semibold text-sm transition-all shadow-md hover:shadow-lg flex items-center gap-2">
+    <i class="fas fa-paper-plane text-xs"></i>
+    <span>Предложить идею</span>
+</a>
             </div>
+
+            <!-- Mobile Menu Toggle Button -->
+            <button id="mobile-menu-btn" class="md:hidden text-slate-700 hover:text-adg-green p-2 focus:outline-none">
+                <i class="fa-solid fa-bars text-2xl"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-slate-200 px-4 pt-2 pb-6 space-y-3">
+            <a href="#about" class="block py-2 text-slate-700 font-medium hover:text-adg-green">О нас</a>
+            <a href="#ideas" class="block py-2 text-slate-700 font-medium hover:text-adg-green">Идеи и Парламент</a>
+            <a href="#classes-banner" class="block py-2 text-slate-700 font-medium hover:text-adg-green">Занятия</a>
+            <a href="#bot" class="block py-2 text-slate-700 font-medium hover:text-adg-green">Приемная & Опросы</a>
+            <a href="#bot" class="w-full mt-2 text-center bg-adg-green text-white py-3 rounded-xl font-semibold block">
+                Предложить идею / Жалобу
+            </a>
         </div>
     </header>
+
 
     <!-- Main Content -->
     <main class="flex-grow">
