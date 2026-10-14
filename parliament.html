@@ -27,188 +27,164 @@
 </head>
 <body class="bg-slate-50 font-sans text-slate-800 antialiased min-h-screen flex flex-col">
 
-     <!-- Navigation Bar -->
-    <header class="bg-white border-b border-slate-200">
+      <!-- Header -->
+    <header class="sticky top-0 z-50 bg-white border-b border-slate-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-            <!-- Brand Logo -->
-            <a href="index.html" class="flex items-center">
+             <a href="index.html" class="flex items-center">
     <img src="logo.jpg" alt="АдГ Логотип" class="h-10 w-auto">
                 <div class="hidden sm:flex flex-col border-l border-slate-200 pl-3">
                     <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Партия</span>
                     <span class="text-xs font-extrabold text-adg-green tracking-wide uppercase">Альтернатива для Гимназии</span>
                 </div>
             </a>
-
-            <!-- Desktop Menu -->
+            
             <nav class="hidden md:flex items-center gap-8 font-medium text-sm text-slate-600">
-                <a href="#about" class="hover:text-adg-green transition-colors">О нас</a>
-                <a href="#ideas" class="hover:text-adg-green transition-colors">Идеи и Парламент</a>
-                <a href="#bot" onclick="switchTab(1)" class="hover:text-adg-green transition-colors">Приемная & Опросы</a>
-                <a href="#classes-banner" class="hover:text-adg-green transition-colors">Занятия</a>
+                <a href="index.html#about" class="hover:text-adg-green transition-colors">О нас</a>
+                <a href="index.html#ideas" class="hover:text-adg-green transition-colors">Идеи и Парламент</a>
+                <a href="classes.html" class="text-adg-green font-bold">Занятия</a>
+                <a href="index.html#bot" class="hover:text-adg-green transition-colors">Приемная & Опросник</a>
+                <a href="index.html#groups" class="hover:text-adg-green transition-colors">Инициативная группа</a>
             </nav>
-
-            <!-- Action Button -->
             <a href="#bot" onclick="switchTab(1)" class="bg-adg-green hover:bg-adg-greenDark text-white px-5 py-2.5 rounded-xl font-semibold text-sm transition-all shadow-md hover:shadow-lg flex items-center gap-2">
     <i class="fas fa-paper-plane text-xs"></i>
     <span>Предложить идею</span>
 </a>
-            </div>
-
-            <!-- Mobile Menu Toggle Button -->
-            <button id="mobile-menu-btn" class="md:hidden text-slate-700 hover:text-adg-green p-2 focus:outline-none">
-                <i class="fa-solid fa-bars text-2xl"></i>
-            </button>
-        </div>
-
-        <!-- Mobile Menu Dropdown -->
-        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-slate-200 px-4 pt-2 pb-6 space-y-3">
-            <a href="#about" class="block py-2 text-slate-700 font-medium hover:text-adg-green">О нас</a>
-            <a href="#ideas" class="block py-2 text-slate-700 font-medium hover:text-adg-green">Идеи и Парламент</a>
-            <a href="#classes-banner" class="block py-2 text-slate-700 font-medium hover:text-adg-green">Занятия</a>
-            <a href="#bot" class="block py-2 text-slate-700 font-medium hover:text-adg-green">Приемная & Опросы</a>
-            <a href="#bot" class="w-full mt-2 text-center bg-adg-green text-white py-3 rounded-xl font-semibold block">
-                Предложить идею / Жалобу
-            </a>
         </div>
     </header>
 
+   <!-- Main Content -->
+    <main class="flex-grow py-12">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
 
-    <!-- Main Content -->
-    <main class="flex-grow">
-        <!-- Hero Section -->
-        <section class="bg-gradient-to-b from-white via-slate-50 to-slate-100 py-12 border-b border-slate-200">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <!-- Заголовок страницы -->
+            <div class="text-center">
                 <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-adg-greenLight border border-adg-green/20 text-adg-green text-xs font-bold uppercase tracking-wider mb-4">
-                    <i class="fa-solid fa-diagram-project"></i> Наглядная схема
+                    <i class="fa-solid fa-sitemap"></i> Визуальная схема структуры
                 </div>
-                <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight mb-4">
+                <h1 class="text-3xl sm:text-5xl font-black text-slate-900 tracking-tight mb-4">
                     Устройство <span class="text-adg-green">Школьного Парламента</span>
                 </h1>
                 <p class="text-base sm:text-lg text-slate-600 max-w-2xl mx-auto">
-                    Иерархия, порядок выборов и структура рабочих комитетов в виде понятной инфографики.
+                    Наглядная карта руководства, распределения мандатов и работы профильных комитетов.
                 </p>
             </div>
-        </section>
 
-        <!-- СХЕМА 1: ИЕРАРХИЯ ВЛАСТИ (ДЕРЕВО) -->
-        <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-            <h2 class="text-2xl font-black text-slate-900 text-center mb-8 flex items-center justify-center gap-3">
-                <i class="fa-solid fa-sitemap text-adg-green"></i> Иерархическая структура
-            </h2>
+            <!-- БЛОК 1: ВЕРХОВНОЕ РУКОВОДСТВО И 30 МЕСТ -->
+            <div class="bg-white rounded-3xl p-8 md:p-10 border border-slate-200 shadow-xl relative overflow-hidden">
+                <div class="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-adg-green via-emerald-400 to-adg-greenDark"></div>
 
-            <div class="flex flex-col items-center">
-                
-                <!-- ВЕРШИНА: ПРЕЗИДЕНТ -->
-                <div class="bg-gradient-to-r from-adg-green to-adg-greenDark text-white p-6 rounded-3xl shadow-xl w-full max-w-md text-center relative border-2 border-adg-green">
-                    <div class="w-12 h-12 bg-white/20 rounded-2xl flex items-center justify-center text-white text-xl mx-auto mb-3">
-                        <i class="fa-solid fa-crown"></i>
+                <div class="text-center max-w-xl mx-auto mb-10">
+                    <div class="inline-block p-4 bg-gradient-to-br from-adg-green to-adg-greenDark text-white rounded-3xl shadow-lg mb-4">
+                        <i class="fa-solid fa-crown text-3xl"></i>
                     </div>
-                    <span class="text-xs uppercase tracking-widest text-emerald-200 font-bold">Глава & Спикер</span>
-                    <h3 class="text-xl font-bold">Президент Гимназии</h3>
-                    <p class="text-xs text-emerald-100 mt-2">Возглавляет парламент и формирует повестку заседаний (созыв раз в 3 недели)</p>
+                    <h2 class="text-2xl font-black text-slate-900">Президент — Глава (Спикер) Парламента</h2>
+                    <p class="text-sm text-slate-600 mt-2">Координирует работу всего депутатского корпуса, ведет заседания и утверждает общую повестку (созыв каждые 3 недели).</p>
                 </div>
 
-                <!-- Стрелка вниз -->
-                <div class="w-1 bg-adg-green/30 h-8 my-1"></div>
-                <i class="fa-solid fa-chevron-down text-adg-green -mt-3 mb-2"></i>
-
-                <!-- УРОВЕНЬ 2: ЗАМПРЕЗИДЕНТЫ -->
-                <div class="bg-emerald-50 border-2 border-adg-green rounded-2xl p-4 w-full max-w-sm text-center shadow-sm">
-                    <div class="flex justify-center items-center gap-2 text-adg-green font-bold text-sm">
-                        <i class="fa-solid fa-user-gear"></i> 2 Зампрезидента
+                <div class="relative border-t border-slate-200 pt-8">
+                    <div class="text-center mb-6">
+                        <span class="px-4 py-1.5 bg-adg-greenLight text-adg-green font-bold text-xs uppercase tracking-widest rounded-full border border-adg-green/20">
+                            <i class="fa-solid fa-landmark mr-1"></i> Депутатский корпус: ровно 30 мест
+                        </span>
+                        <p class="text-xs text-slate-500 mt-1">Избираются по пропорциональной системе (партийные списки по 15 человек, порог 6% / 2 места)</p>
                     </div>
-                    <p class="text-xs text-slate-600 mt-1">Избираются напрямую из состава парламента</p>
-                </div>
 
-                <!-- Стрелка вниз -->
-                <div class="w-1 bg-adg-green/30 h-8 my-1"></div>
-                <i class="fa-solid fa-chevron-down text-adg-green -mt-3 mb-2"></i>
-
-                <!-- УРОВЕНЬ 3: ПАРЛАМЕНТ (30 МЕСТ) -->
-                <div class="bg-white border border-slate-300 rounded-3xl p-6 w-full shadow-md text-center">
-                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-adg-greenLight text-adg-green font-bold text-base mb-3">
-                        <i class="fa-solid fa-landmark"></i> Состав Парламента: 30 мест
+                    <!-- ВИЗУАЛЬНАЯ СЕТКА ИЗ 30 КВАДРАТИКОВ -->
+                    <div class="grid grid-cols-6 sm:grid-cols-10 gap-2.5 max-w-3xl mx-auto bg-slate-50 p-6 rounded-2xl border border-slate-200">
+                        <!-- Цикл генерирует ровно 30 красивых плашек-мест -->
+                        <script>
+                            for(let i = 1; i <= 30; i++) {
+                                document.write(`
+                                    <div class="bg-white border-2 border-adg-green/30 hover:border-adg-green hover:bg-emerald-50 aspect-square rounded-xl flex flex-col items-center justify-center text-xs font-bold text-slate-700 shadow-sm transition-all cursor-pointer group" title="Депутатское место №${i}">
+                                        <i class="fa-solid fa-user text-adg-green/40 group-hover:text-adg-green text-[10px] mb-0.5"></i>
+                                        <span>${i}</span>
+                                    </div>
+                                `);
+                            }
+                        </script>
                     </div>
-                    <p class="text-xs text-slate-500 max-w-lg mx-auto mb-6">Формируется по пропорциональной системе из партийных списков</p>
-
-                    <!-- РАЗВЕТВЛЕНИЕ НА КОМИТЕТЫ -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-left pt-4 border-t border-slate-200">
-                        <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200">
-                            <div class="font-bold text-slate-900 text-sm flex items-center gap-2 mb-1">
-                                <i class="fa-solid fa-user-tie text-adg-green"></i> Главы Комитетов
-                            </div>
-                            <p class="text-xs text-slate-600">Обязательно избираются из числа 30 депутатов парламента.</p>
-                        </div>
-                        <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200">
-                            <div class="font-bold text-slate-900 text-sm flex items-center gap-2 mb-1">
-                                <i class="fa-solid fa-hand-holding-hand text-adg-green"></i> Участники Комитетов
-                            </div>
-                            <p class="text-xs text-slate-600">Любые инициативные ученики-добровольцы без ограничений.</p>
-                        </div>
+                    <div class="flex justify-between items-center text-xs text-slate-400 max-w-3xl mx-auto px-2 mt-2">
+                        <span>← Мандат 1</span>
+                        <span class="font-medium text-slate-600">Голосование с 5 класса</span>
+                        <span>Мандат 30 →</span>
                     </div>
                 </div>
 
-            </div>
-        </section>
-
-        <!-- СХЕМА 2: ПРАВИЛА ВЫБОРОВ И БАРЬЕРЫ (ИНФОГРАФИКА С ПЛИТКАМИ И СТРЕЛКАМИ) -->
-        <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 border-t border-slate-200">
-            <h2 class="text-2xl font-black text-slate-900 text-center mb-10 flex items-center justify-center gap-3">
-                <i class="fa-solid fa-check-to-slot text-adg-green"></i> Избирательная система в схемах
-            </h2>
-
-            <!-- Линейный процесс выборов -->
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 relative">
-                
-                <!-- Шаг 1 -->
-                <div class="bg-white p-6 rounded-2xl border-2 border-emerald-100 shadow-sm relative">
-                    <div class="w-8 h-8 bg-adg-green text-white font-bold rounded-xl flex items-center justify-center text-sm mb-4">1</div>
-                    <h4 class="font-bold text-slate-900 text-base mb-1">Голосование</h4>
-                    <p class="text-xs text-slate-600">Право голоса имеют абсолютно все ученики с <b>5 класса</b>.</p>
+                <!-- 2 ЗАМПРЕЗИДЕНТА -->
+                <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-xl mx-auto">
+                    <div class="bg-emerald-50 border border-emerald-200 p-4 rounded-2xl text-center">
+                        <i class="fa-solid fa-user-gear text-adg-green text-lg mb-1"></i>
+                        <div class="font-bold text-slate-900 text-sm">1-й Зампрезидента</div>
+                        <div class="text-xs text-slate-600">Избирается из состава парламента</div>
+                    </div>
+                    <div class="bg-emerald-50 border border-emerald-200 p-4 rounded-2xl text-center">
+                        <i class="fa-solid fa-user-gear text-adg-green text-lg mb-1"></i>
+                        <div class="font-bold text-slate-900 text-sm">2-й Зампрезидента</div>
+                        <div class="text-xs text-slate-600">Избирается из состава парламента</div>
+                    </div>
                 </div>
-
-                <!-- Шаг 2 -->
-                <div class="bg-white p-6 rounded-2xl border-2 border-emerald-100 shadow-sm relative">
-                    <div class="w-8 h-8 bg-adg-green text-white font-bold rounded-xl flex items-center justify-center text-sm mb-4">2</div>
-                    <h4 class="font-bold text-slate-900 text-base mb-1">Партийный список</h4>
-                    <p class="text-xs text-slate-600">Каждая партия выдвигает команду из <b>15 человек</b>.</p>
-                </div>
-
-                <!-- Шаг 3 -->
-                <div class="bg-white p-6 rounded-2xl border-2 border-emerald-100 shadow-sm relative">
-                    <div class="w-8 h-8 bg-adg-green text-white font-bold rounded-xl flex items-center justify-center text-sm mb-4">3</div>
-                    <h4 class="font-bold text-slate-900 text-base mb-1">Проходной порог</h4>
-                    <p class="text-xs text-slate-600">Минимум <b>6% голосов</b> (гарантирует 2 места в парламенте).</p>
-                </div>
-
-                <!-- Шаг 4 -->
-                <div class="bg-white p-6 rounded-2xl border-2 border-emerald-100 shadow-sm relative">
-                    <div class="w-8 h-8 bg-adg-green text-white font-bold rounded-xl flex items-center justify-center text-sm mb-4">4</div>
-                    <h4 class="font-bold text-slate-900 text-base mb-1">Распределение</h4>
-                    <p class="text-xs text-slate-600"><b>Пропорциональная</b> рассадка на 30 парламентских мест.</p>
-                </div>
-
             </div>
 
-            <!-- Инфографическая плашка регламента -->
-            <div class="mt-8 bg-gradient-to-r from-adg-green to-adg-greenDark rounded-3xl p-6 text-white flex flex-col md:flex-row items-center justify-between gap-6 shadow-lg">
-                <div class="flex items-center gap-4">
-                    <div class="w-12 h-12 bg-white/20 rounded-2xl flex items-center justify-center text-2xl shrink-0">
-                        <i class="fa-solid fa-calendar-check"></i>
-                    </div>
+            <!-- БЛОК 2: ВЫНЕСЕННЫЕ ОТДЕЛЬНО КОМИТЕТЫ И ДОБРОВОЛЬЦЫ -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                
+                <!-- Комитеты и Главы -->
+                <div class="bg-white rounded-3xl p-8 border border-slate-200 shadow-lg flex flex-col justify-between">
                     <div>
-                        <h4 class="font-bold text-lg">Регламент заседаний</h4>
-                        <p class="text-xs text-emerald-100">Созывы проводятся каждые 3 недели. Повестка готовится Президентом заранее.</p>
+                        <div class="w-12 h-12 bg-adg-greenLight text-adg-green rounded-2xl flex items-center justify-center text-xl mb-6">
+                            <i class="fa-solid fa-sitemap"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-3">Профильные комитеты</h3>
+                        <p class="text-sm text-slate-600 leading-relaxed mb-6">
+                            Парламент разбивается на специализированные направления (спорт, культура, учеба, медиа). 
+                        </p>
+                        <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3">
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 rounded-xl bg-adg-green text-white flex items-center justify-center text-xs font-bold">👑</div>
+                                <div>
+                                    <div class="text-xs font-bold text-slate-900">Главы комитетов</div>
+                                    <div class="text-[11px] text-slate-500">Строго депутаты парламента</div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <a href="index.html" class="whitespace-nowrap px-6 py-3 bg-white text-adg-green hover:bg-emerald-50 font-bold rounded-xl text-xs transition-all shadow-md">
-                    <i class="fa-solid fa-arrow-left mr-2"></i> Вернуться на главную
+
+                <!-- Добровольцы от народа -->
+                <div class="bg-white rounded-3xl p-8 border border-slate-200 shadow-lg flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 bg-adg-greenLight text-adg-green rounded-2xl flex items-center justify-center text-xl mb-6">
+                            <i class="fa-solid fa-users"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-3">Народные добровольцы</h3>
+                        <p class="text-sm text-slate-600 leading-relaxed mb-6">
+                            Любой ученик гимназии может присоединиться к любому комитету и участвовать в реальной работе без депутатского мандата.
+                        </p>
+                        <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3">
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 rounded-xl bg-emerald-600 text-white flex items-center justify-center text-xs font-bold">🤝</div>
+                                <div>
+                                    <div class="text-xs font-bold text-slate-900">Участники-активисты</div>
+                                    <div class="text-[11px] text-slate-500">Все желающие ученики из народа</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Кнопка возврата -->
+            <div class="text-center pt-4">
+                <a href="index.html" class="inline-flex items-center gap-2 px-8 py-4 bg-adg-green hover:bg-adg-greenDark text-white font-bold rounded-2xl shadow-lg transition-all hover:scale-105">
+                    <i class="fa-solid fa-arrow-left"></i> На главную страницу
                 </a>
             </div>
-        </section>
+
+        </div>
     </main>
 
-    <!-- Footer (Точно как в index.html) -->
+    <!-- Footer -->
     <footer class="bg-slate-900 text-slate-400 py-12 mt-auto border-t border-slate-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
             <div class="flex items-center gap-3">
