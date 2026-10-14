@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Школьный Парламент — АдГ</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        adg: {
+                            green: '#0D7A44',
+                            greenDark: '#074E2B',
+                            greenLight: '#E8F5EE',
+                            red: '#D92B2B'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-slate-50 font-sans text-slate-800 antialiased min-h-screen flex flex-col">
+
+    <!-- Header / Navbar (Точно как в index.html) -->
+    <header class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-3">
+                <div class="font-black text-2xl tracking-tighter text-adg-green">
+                    АдГ<span class="text-adg-red">.</span>
+                </div>
+                <div class="hidden sm:block border-l border-slate-200 pl-3">
+                    <div class="text-[10px] uppercase tracking-wider text-slate-400 font-bold">Партия</div>
+                    <div class="text-xs font-bold text-slate-700">Альтернатива для Гимназии</div>
+                </div>
+            </a>
+            <nav class="hidden md:flex items-center gap-8 text-sm font-semibold text-slate-600">
+                <a href="index.html#about" class="hover:text-adg-green transition-colors">О нас</a>
+                <a href="index.html#ideas" class="hover:text-adg-green transition-colors">Идеи и Парламент</a>
+                <a href="index.html#bot" class="hover:text-adg-green transition-colors">Приемная & Опросы</a>
+                <a href="classes.html" class="hover:text-adg-green transition-colors">Занятия</a>
+            </nav>
+            <div>
+                <a href="https://forms.gle/DJDz6uZYkAd46KS56" target="_blank" class="px-5 py-2.5 bg-adg-green hover:bg-adg-greenDark text-white font-bold rounded-xl text-xs transition-all shadow-md">
+                    <i class="fa-solid fa-paper-plane mr-1.5"></i> Предложить идею
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow">
+        <!-- Hero Section -->
+        <section class="bg-gradient-to-b from-white via-slate-50 to-slate-100 py-12 lg:py-16 border-b border-slate-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-adg-greenLight border border-adg-green/20 text-adg-green text-xs font-bold uppercase tracking-wider mb-4">
+                    <i class="fa-solid fa-landmark"></i> Структура самоуправления
+                </div>
+                <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight mb-4">
+                    Парламентские <span class="text-adg-green">Выборы и Устройство</span>
+                </h1>
+                <p class="text-base sm:text-lg text-slate-600 max-w-2xl mx-auto">
+                    Прозрачная система управления гимназией, где голос каждого ученика имеет реальный вес и приводит к изменениям.
+                </p>
+            </div>
+        </section>
+
+        <!-- Schemes & Cards Grid -->
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+                <!-- Карточка 1: Выборы и возраст -->
+                <div class="bg-white rounded-3xl p-8 border border-slate-200 shadow-sm hover:shadow-md transition-all">
+                    <div class="w-12 h-12 bg-adg-greenLight rounded-2xl flex items-center justify-center text-adg-green text-xl mb-6">
+                        <i class="fa-solid fa-users-rectangle"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-2">Голосование с 5 класса</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        Каждый гимназист начиная с 5 класса имеет полноценное право голоса на выборах, влияя на будущее учебного процесса.
+                    </p>
+                </div>
+
+                <!-- Карточка 2: Места в парламенте -->
+                <div class="bg-white rounded-3xl p-8 border border-slate-200 shadow-sm hover:shadow-md transition-all">
+                    <div class="w-12 h-12 bg-adg-greenLight rounded-2xl flex items-center justify-center text-adg-green text-xl mb-6">
+                        <i class="fa-solid fa-chair"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-2">30 мест в парламенте</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        Компактный и эффективный состав депутатского корпуса для быстрого принятия решений и обсуждения инициатив.
+                    </p>
+                </div>
+
+                <!-- Карточка 3: Система выборов -->
+                <div class="bg-white rounded-3xl p-8 border border-slate-200 shadow-sm hover:shadow-md transition-all">
+                    <div class="w-12 h-12 bg-adg-greenLight rounded-2xl flex items-center justify-center text-adg-green text-xl mb-6">
+                        <i class="fa-solid fa-scale-balanced"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-2">Пропорциональная система</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        Распределение мест строго пропорционально поддержке партий среди учеников гимназии. Никаких подтасовок.
+                    </p>
+                </div>
+
+                <!-- Карточка 4: Президент и спикер -->
+                <div class="bg-white rounded-3xl p-8 border border-slate-200 shadow-sm hover:shadow-md transition-all">
+                    <div class="w-12 h-12 bg-adg-greenLight rounded-2xl flex items-center justify-center text-adg-green text-xl mb-6">
+                        <i class="fa-solid fa-user-tie"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-2">Президент — глава парламента</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        Президент школы одновременно является спикером парламента, координируя его работу и представляя интересы учеников.
+                    </p>
+                </div>
+
+                <!-- Карточка 5: Комитеты -->
+                <div class="bg-white rounded-3xl p-8 border border-slate-200 shadow-sm hover:shadow-md transition-all">
+                    <div class="w-12 h-12 bg-adg-greenLight rounded-2xl flex items-center justify-center text-adg-green text-xl mb-6">
+                        <i class="fa-solid fa-sitemap"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-2">Комитеты и добровольцы</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        Парламент делится на рабочие комитеты. Главы комитетов избираются, а остальные участники — активные добровольцы.
+                    </p>
+                </div>
+
+                <!-- Карточка 6: Зампрезиденты -->
+                <div class="bg-white rounded-3xl p-8 border border-slate-200 shadow-sm hover:shadow-md transition-all">
+                    <div class="w-12 h-12 bg-adg-greenLight rounded-2xl flex items-center justify-center text-adg-green text-xl mb-6">
+                        <i class="fa-solid fa-user-gear"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-2">2 выборных зампрезидента</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        Избираются непосредственно из состава действующего парламента для помощи руководителю и оперативного управления.
+                    </p>
+                </div>
+
+                <!-- Карточка 7: Партийный список -->
+                <div class="bg-white rounded-3xl p-8 border border-slate-200 shadow-sm hover:shadow-md transition-all">
+                    <div class="w-12 h-12 bg-adg-greenLight rounded-2xl flex items-center justify-center text-adg-green text-xl mb-6">
+                        <i class="fa-solid fa-list-check"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-2">Партийный список 15 человек</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        Каждая партия формирует открытый список из 15 кандидатов, готовых реализовать свою программу на практике.
+                    </p>
+                </div>
+
+                <!-- Карточка 8: Порог и барьер -->
+                <div class="bg-white rounded-3xl p-8 border border-slate-200 shadow-sm hover:shadow-md transition-all">
+                    <div class="w-12 h-12 bg-adg-greenLight rounded-2xl flex items-center justify-center text-adg-green text-xl mb-6">
+                        <i class="fa-solid fa-chart-line"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-2">Нижний порог — 6% (2 человека)</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        Проходной барьер в 6 голосов/процентов гарантирует проход в парламент минимум 2 представителей от объединения.
+                    </p>
+                </div>
+
+                <!-- Карточка 9: Созывы и повестка -->
+                <div class="bg-white rounded-3xl p-8 border border-slate-200 shadow-sm hover:shadow-md transition-all">
+                    <div class="w-12 h-12 bg-adg-greenLight rounded-2xl flex items-center justify-center text-adg-green text-xl mb-6">
+                        <i class="fa-solid fa-calendar-days"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-2">Созывы каждые 3 недели</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        Регулярные заседания раз в 3 недели со строгой повесткой, которую предварительно составляет президент парламента.
+                    </p>
+                </div>
+
+            </div>
+
+            <!-- Кнопка возврата назад -->
+            <div class="mt-12 text-center">
+                <a href="index.html" class="inline-flex items-center gap-2 px-8 py-4 bg-adg-green hover:bg-adg-greenDark text-white font-bold rounded-2xl shadow-lg transition-all hover:scale-105">
+                    <i class="fa-solid fa-arrow-left"></i> На главную страницу
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer (Точно как в index.html) -->
+    <footer class="bg-slate-900 text-slate-400 py-12 mt-auto border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="flex items-center gap-3">
+                <div class="font-black text-2xl tracking-tighter text-adg-green">АдГ</div>
+                <div class="text-xs text-slate-500">Альтернатива для Гимназии &copy; 2026</div>
+            </div>
+            <div class="text-xs text-slate-500 text-center md:text-right">
+                Даже если мы не выиграем, мы продолжим организовывать мероприятия,<br>договариваться с администрацией и помогать ученикам!
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
