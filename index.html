@@ -4,13 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>АдГ — Альтернатива для Гимназии | Официальный сайт партии</title>
-    <!-- Tailwind CSS CDN -->
+    
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <script>
@@ -44,23 +42,77 @@
             background-image: radial-gradient(#008751 0.5px, transparent 0.5px), radial-gradient(#008751 0.5px, #f8fafc 0.5px);
             background-size: 20px 20px;
             background-position: 0 0, 10px 10px;
-            background-opacity: 0.05;
+        }
+
+        /* Переключатель партий */
+        .party-switcher {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+            transition: transform 0.2s ease;
+        }
+        .party-switcher:hover {
+            transform: scale(1.05);
+        }
+        .party-switcher .logo-adg,
+        .party-switcher .logo-ppp {
+            height: 40px;
+            width: auto;
+            transition: opacity 0.3s ease;
+        }
+        .party-switcher .logo-ppp {
+            display: none;
+        }
+
+        /* Когда сайт ППП активен */
+        body.ppp-active .party-switcher .logo-adg { display: none; }
+        body.ppp-active .party-switcher .logo-ppp { display: block; }
+
+        /* Контейнер iframe с сайтом ППП */
+        #ppp-frame {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            border: none;
+            z-index: 9999;
+            background: #fff;
+            display: none;
+        }
+
+        body.ppp-active #ppp-frame {
+            display: block;
+        }
+
+        /* Скрываем весь контент АдГ, когда активен ППП */
+        body.ppp-active header,
+        body.ppp-active main,
+        body.ppp-active footer {
+            display: none;
         }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800 font-sans antialiased selection:bg-adg-green selection:text-white flex flex-col min-h-screen">
 
+    <!-- Iframe с сайтом ППП -->
+    <iframe id="ppp-frame" src="https://pomooorskiy.github.io/" title="Партия подотчётного парламента"></iframe>
+
     <!-- Navigation Bar -->
     <header class="bg-white border-b border-slate-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-            <!-- Brand Logo -->
-            <a href="index.html" class="flex items-center">
-    <img src="logo.jpg" alt="АдГ Логотип" class="h-10 w-auto">
-                <div class="hidden sm:flex flex-col border-l border-slate-200 pl-3">
+            <!-- Brand Logo + Переключатель -->
+            <div class="flex items-center gap-3">
+                <div class="party-switcher" id="partySwitcher" title="Переключить партию">
+                    <img src="logo.jpg" alt="АдГ Логотип" class="logo-adg">
+                    <img src="https://lh3.googleusercontent.com/d/1KRb9pi-oAD3qofva0diEfKu99MLGGNY4" alt="ППП Логотип" class="logo-ppp">
+                </div>
+                <a href="index.html" class="hidden sm:flex flex-col border-l border-slate-200 pl-3">
                     <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Партия</span>
                     <span class="text-xs font-extrabold text-adg-green tracking-wide uppercase">Альтернатива для Гимназии</span>
-                </div>
-            </a>
+                </a>
+            </div>
 
             <!-- Desktop Menu -->
             <nav class="hidden md:flex items-center gap-8 font-medium text-sm text-slate-600">
@@ -72,9 +124,9 @@
 
             <!-- Action Button -->
             <a href="#bot" onclick="switchTab(1)" class="bg-adg-green hover:bg-adg-greenDark text-white px-5 py-2.5 rounded-xl font-semibold text-sm transition-all shadow-md hover:shadow-lg flex items-center gap-2">
-    <i class="fas fa-paper-plane text-xs"></i>
-    <span>Предложить идею</span>
-</a>
+                <i class="fas fa-paper-plane text-xs"></i>
+                <span>Предложить идею</span>
+            </a>
             </div>
 
             <!-- Mobile Menu Toggle Button -->
@@ -122,8 +174,6 @@
                         </a>
                     </div>
                 </div>
-
-                    
 
                 <!-- Hero Right Column / Visual Card -->
                 <div class="lg:col-span-5">
@@ -285,7 +335,6 @@
 </section>
 
     <!-- Join Us Callout Banner -->
-<!-- Join Us Callout Banner -->
 <section id="join-us" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
     <div class="bg-gradient-to-r from-adg-green to-adg-greenDark rounded-3xl p-10 md:p-12 text-white flex flex-col sm:flex-row items-center justify-between gap-6 shadow-xl">
         <div class="space-y-2 text-center sm:text-left">
@@ -505,6 +554,26 @@
 
     // 2. Вся остальная логика после загрузки страницы
     document.addEventListener('DOMContentLoaded', () => {
+        // Переключатель партий
+        const switcher = document.getElementById('partySwitcher');
+        if (switcher) {
+            if (localStorage.getItem('activeParty') === 'ppp') {
+                document.body.classList.add('ppp-active');
+            }
+            switcher.addEventListener('click', () => {
+                const isPpp = document.body.classList.toggle('ppp-active');
+                localStorage.setItem('activeParty', isPpp ? 'ppp' : 'adg');
+            });
+        }
+
+        // Слушаем сообщения из iframe (возврат на АдГ)
+        window.addEventListener('message', (e) => {
+            if (e.data === 'switch-to-adg') {
+                document.body.classList.remove('ppp-active');
+                localStorage.setItem('activeParty', 'adg');
+            }
+        });
+
         // Мобильное меню
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
@@ -513,29 +582,6 @@
                 mobileMenu.classList.toggle('hidden');
             });
         }
-
-        // Фильтры карточек
-        const filterBtns = document.querySelectorAll('.filter-btn');
-        const clubCards = document.querySelectorAll('.club-card');
-        filterBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                filterBtns.forEach(b => {
-                    b.classList.remove('bg-adg-green', 'text-white', 'shadow-sm');
-                    b.classList.add('bg-white', 'text-slate-600');
-                });
-                btn.classList.add('bg-adg-green', 'text-white', 'shadow-sm');
-                btn.classList.remove('bg-white', 'text-slate-600');
-
-                const filter = btn.getAttribute('data-filter');
-                clubCards.forEach(card => {
-                    if (filter === 'all' || card.getAttribute('data-category') === filter) {
-                        card.style.display = 'block';
-                    } else {
-                        card.style.display = 'none';
-                    }
-                });
-            });
-        });
 
         // Отправка формы (Formspree)
         const suggestForm = document.getElementById('suggestForm') || document.querySelector('#tab-content-1 form');
@@ -580,7 +626,7 @@
             });
         }
 
-        // Опрос дня и ограничение повторного голосования
+        // Опрос дня
         function applyPollRestriction() {
             const pollOptionsList = document.getElementById('poll-options-list');
             const pollSubmitBtn = document.getElementById('poll-submit-btn');
@@ -608,5 +654,6 @@
             }
         });
     });
-</script>
+    </script>
+</body>
 </html>
