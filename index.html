@@ -122,7 +122,7 @@
                 <div class="lg:col-span-5">
                     <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-xl border border-slate-200/80 relative overflow-hidden">
                         <!-- Top Accent Ribbon -->
-                        <div class="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-adg-green via-emerald-400 to-adg-red"></div>
+                        <div class="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-adg-green via-adg-green-400 to-adg-red"></div>
 
                         <div class="flex items-center justify-between mb-6">
                             <div class="flex items-center gap-3">
@@ -157,7 +157,7 @@
                         </div>
 
                         <!-- Quote / Manifesto Snippet -->
-                        <div class="p-4 rounded-2xl bg-emerald-50/50 border border-emerald-100 text-xs text-slate-600 space-y-1">
+                        <div class="p-4 rounded-2xl bg-adg-green-50/50 border border-adg-green-100 text-xs text-slate-600 space-y-1">
                             <div class="font-bold text-adg-green flex items-center gap-1.5">
                                 <i class="fa-solid fa-bullhorn"></i> Главная цель:
                             </div>
@@ -228,7 +228,7 @@
             </div>
             <div>
               <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Ваше сообщение / Идея</label>
-              <textarea name="message" rows="4" placeholder="Опишите вашу идею или вопрос подробнее..." required class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500"></textarea>
+              <textarea name="message" rows="4" placeholder="Опишите вашу идею или вопрос подробнее..." required class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-adg-green-500"></textarea>
             </div>
             <button type="submit" class="w-full bg-adg-green hover:bg-adg-greenDark text-white py-3 rounded-xl font-bold text-xs uppercase tracking-wider transition-all duration-200 shadow-lg flex items-center justify-center gap-2">
               <i class="fa-solid fa-paper-plane"></i>
@@ -244,28 +244,28 @@
               <p class="text-xs text-slate-400 mb-4">Выберите наиболее важный пункт. Голосование анонимное.</p>
             </div>
 
-            <div id="poll-already-voted" class="hidden p-4 bg-emerald-500/10 border border-emerald-500/30 rounded-xl text-emerald-400 text-xs text-center font-bold">
+            <div id="poll-already-voted" class="hidden p-4 bg-adg-green-500/10 border border-adg-green-500/30 rounded-xl text-adg-green-400 text-xs text-center font-bold">
               <i class="fa-solid fa-circle-check mr-1"></i> Вы уже приняли участие в этом опросе. Спасибо!
             </div>
 
             <div id="poll-options-list" class="space-y-2.5">
-              <label class="flex items-center gap-3 p-3 bg-slate-900/80 border border-slate-700 rounded-xl cursor-pointer hover:border-emerald-500 transition-all">
-                <input type="radio" name="poll_option" value="Да" class="w-4 h-4 text-emerald-500 focus:ring-emerald-500 bg-slate-800 border-slate-600" required>
+              <label class="flex items-center gap-3 p-3 bg-slate-900/80 border border-slate-700 rounded-xl cursor-pointer hover:border-adg-green-500 transition-all">
+                <input type="radio" name="poll_option" value="Да" class="w-4 h-4 text-adg-green-500 focus:ring-adg-green-500 bg-slate-800 border-slate-600" required>
                 <span class="text-xs text-slate-200 font-medium">Да</span>
               </label>
 
-              <label class="flex items-center gap-3 p-3 bg-slate-900/80 border border-slate-700 rounded-xl cursor-pointer hover:border-emerald-500 transition-all">
-                <input type="radio" name="poll_option" value="Нет" class="w-4 h-4 text-emerald-500 focus:ring-emerald-500 bg-slate-800 border-slate-600">
+              <label class="flex items-center gap-3 p-3 bg-slate-900/80 border border-slate-700 rounded-xl cursor-pointer hover:border-adg-green-500 transition-all">
+                <input type="radio" name="poll_option" value="Нет" class="w-4 h-4 text-adg-green-500 focus:ring-adg-green-500 bg-slate-800 border-slate-600">
                 <span class="text-xs text-slate-200 font-medium">Нет</span>
               </label>
 
-              <label class="flex items-center gap-3 p-3 bg-slate-900/80 border border-slate-700 rounded-xl cursor-pointer hover:border-emerald-500 transition-all">
-                <input type="radio" name="poll_option" value="Еще не решил(-а)" class="w-4 h-4 text-emerald-500 focus:ring-emerald-500 bg-slate-800 border-slate-600">
+              <label class="flex items-center gap-3 p-3 bg-slate-900/80 border border-slate-700 rounded-xl cursor-pointer hover:border-adg-green-500 transition-all">
+                <input type="radio" name="poll_option" value="Еще не решил(-а)" class="w-4 h-4 text-adg-green-500 focus:ring-adg-green-500 bg-slate-800 border-slate-600">
                 <span class="text-xs text-slate-200 font-medium">Еще не решил(-а)</span>
               </label>
             </div>
 
-            <button id="poll-submit-btn" type="submit" onclick="localStorage.setItem('hasVotedInPoll', 'true')" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white py-3 rounded-xl font-bold text-xs uppercase tracking-wider transition-all duration-200 shadow-lg flex items-center justify-center gap-2 mt-4">
+            <button id="poll-submit-btn" type="submit" onclick="localStorage.setItem('hasVotedInPoll', 'true')" class="w-full bg-adg-green-600 hover:bg-adg-green-500 text-white py-3 rounded-xl font-bold text-xs uppercase tracking-wider transition-all duration-200 shadow-lg flex items-center justify-center gap-2 mt-4">
               <i class="fa-solid fa-check-to-slot"></i>
               <span>Проголосовать</span>
             </button>
@@ -282,7 +282,7 @@
     <div class="bg-gradient-to-r from-adg-green to-adg-greenDark rounded-3xl p-10 md:p-12 text-white flex flex-col sm:flex-row items-center justify-between gap-6 shadow-xl">
         <div class="space-y-2 text-center sm:text-left">
             <h4 class="text-2xl md:text-2xl font-bold text-white">Хочешь войти в Инициативную Группу АдГ?</h4>
-            <p class="text-base md:text-base text-emerald-100"> Мы принимаем всех, кто хочет улучшить жизнь нашей гимназии! </p>
+            <p class="text-base md:text-base text-adg-green-100"> Мы принимаем всех, кто хочет улучшить жизнь нашей гимназии! </p>
         </div>
         <a href="https://docs.google.com/forms/d/e/1FAIpQLSe4wPl2tJEvV4vZif1Y7PkVK5zsixumBt6bxPDogZMOkcxVzg/viewform?usp=header" target="_blank" class="whitespace-nowrap px-10 py-4 bg-white hover:bg-white text-adg-greenDark font-bold rounded-xl text-xl transition-all shadow-md">
             Вступить в группу
@@ -325,7 +325,7 @@
 
                 <!-- Card 2: Library & Study Place -->
                 <div class="bg-slate-50 rounded-2xl p-8 border border-slate-200 hover:shadow-lg transition-all group hover:border-adg-green">
-                    <div class="w-14 h-14 bg-emerald-100 text-adg-green rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition-transform">
+                    <div class="w-14 h-14 bg-adg-green-100 text-adg-green rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition-transform">
                         <i class="fa-solid fa-futbol"></i>
                     </div>
                     <h3 class="text-xl font-bold text-slate-900 mb-3">Спортивные турниры и матчи</h3>
@@ -437,7 +437,7 @@
     <div class="bg-adg-green rounded-3xl p-6 md:p-8 text-white flex flex-col md:flex-row justify-between items-center shadow-lg">
         <div class="mb-6 md:mb-0 md:max-w-xl">
             <h2 class="text-2xl md:text-3xl font-bold mb-3">Занятия, кружки и секции</h2>
-            <p class="text-emerald-100 text-sm md:text-base leading-relaxed">
+            <p class="text-adg-green-100 text-sm md:text-base leading-relaxed">
                 Организация интересных клубов и секций и школьных мероприятий в свободной и дружеской атмосфере
             </p>
         </div>
@@ -485,13 +485,13 @@
         if (tabIndex === 1) {
             if (tab1) tab1.classList.remove('hidden');
             if (tab2) tab2.classList.add('hidden');
-            if (btn1) btn1.className = 'text-sm font-bold pb-2 border-b-2 border-emerald-400 text-white transition-all focus:outline-none';
+            if (btn1) btn1.className = 'text-sm font-bold pb-2 border-b-2 border-adg-green-400 text-white transition-all focus:outline-none';
             if (btn2) btn2.className = 'text-sm font-bold pb-2 border-b-2 border-transparent text-slate-400 hover:text-white transition-all focus:outline-none';
         } else if (tabIndex === 2) {
             if (tab1) tab1.classList.add('hidden');
             if (tab2) tab2.classList.remove('hidden');
             if (btn1) btn1.className = 'text-sm font-bold pb-2 border-b-2 border-transparent text-slate-400 hover:text-white transition-all focus:outline-none';
-            if (btn2) btn2.className = 'text-sm font-bold pb-2 border-b-2 border-emerald-400 text-white transition-all focus:outline-none';
+            if (btn2) btn2.className = 'text-sm font-bold pb-2 border-b-2 border-adg-green-400 text-white transition-all focus:outline-none';
         }
     };
 
