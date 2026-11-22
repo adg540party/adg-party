@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мероприятия — АдГ</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        adg: {
+                            green: '#0D7A44',
+                            greenDark: '#074E2B',
+                            greenLight: '#E8F5EE',
+                            red: '#D92B2B'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-slate-50 font-sans text-slate-800 antialiased min-h-screen flex flex-col">
+
+    <!-- Header / Navbar (Точно как на главной) -->
+    <header class="sticky top-0 z-50 bg-white/85 backdrop-blur-md border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Логотип и название -->
+            <a href="index.html" class="flex items-center gap-3 group">
+                <img src="logo.jpg" alt="АдГ Логотип" class="h-12 w-12 object-contain rounded-2xl shadow-sm group-hover:scale-105 transition-transform">
+                <div class="hidden sm:flex flex-col border-l border-slate-200 pl-3">
+                    <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Партия</span>
+                    <span class="text-xs font-extrabold text-adg-green tracking-wide uppercase">Альтернатива для Гимназии</span>
+                </div>
+            </a>
+
+            <!-- Меню для компьютера -->
+            <nav class="hidden md:flex items-center gap-8 text-sm font-semibold text-slate-600">
+                <a href="index.html#about" class="hover:text-adg-green transition-colors">О нас</a>
+                <a href="index.html#ideas" class="hover:text-adg-green transition-colors">Идеи и Парламент</a>
+                <a href="index.html#bot" class="hover:text-adg-green transition-colors">Приемная & Опросы</a>
+                <a href="classes.html" class="hover:text-adg-green transition-colors">Занятия</a>
+                <a href="events.html" class="text-adg-green font-bold transition-colors">Мероприятия</a>
+            </nav>
+
+            <!-- Кнопка действия -->
+            <div>
+                <a href="https://forms.gle/DJDz6uZYkAd46KS56" target="_blank" class="px-5 py-2.5 bg-adg-green hover:bg-adg-greenDark text-white font-bold rounded-xl text-xs transition-all shadow-md inline-flex items-center gap-2">
+                    <i class="fa-solid fa-paper-plane"></i> Предложить идею
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow py-12">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+
+            <!-- Заголовок страницы -->
+            <div class="text-center max-w-2xl mx-auto mb-10">
+                <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-adg-greenLight border border-adg-green/20 text-adg-green text-xs font-bold uppercase tracking-wider mb-4">
+                    <i class="fa-solid fa-calendar-days"></i> Афиша и события
+                </div>
+                <h1 class="text-3xl sm:text-5xl font-black text-slate-900 tracking-tight mb-4">
+                    Школьные <span class="text-adg-green">Мероприятия</span>
+                </h1>
+                <p class="text-base text-slate-600">
+                    Турниры, концерты, научные баттлы и волонтёрские акции от инициативной группы АдГ.
+                </p>
+            </div>
+
+            <!-- Вкладки-фильтры (Категории) -->
+            <div class="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-10" id="filter-buttons">
+                <button onclick="filterEvents('all', this)" class="filter-btn active px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-adg-green text-white shadow-md transition-all">
+                    Все
+                </button>
+                <button onclick="filterEvents('sport', this)" class="filter-btn px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-white text-slate-600 border border-slate-200 hover:border-adg-green hover:text-adg-green transition-all">
+                    <i class="fa-solid fa-gamepad mr-1.5"></i> Спорт и киберспорт
+                </button>
+                <button onclick="filterEvents('culture', this)" class="filter-btn px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-white text-slate-600 border border-slate-200 hover:border-adg-green hover:text-adg-green transition-all">
+                    <i class="fa-solid fa-masks-theater mr-1.5"></i> Культура
+                </button>
+                <button onclick="filterEvents('science', this)" class="filter-btn px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-white text-slate-600 border border-slate-200 hover:border-adg-green hover:text-adg-green transition-all">
+                    <i class="fa-solid fa-atom mr-1.5"></i> Наука
+                </button>
+                <button onclick="filterEvents('volunteer', this)" class="filter-btn px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-white text-slate-600 border border-slate-200 hover:border-adg-green hover:text-adg-green transition-all">
+                    <i class="fa-solid fa-hand-holding-heart mr-1.5"></i> Волонтёрство
+                </button>
+            </div>
+
+            <!-- Сетка карточек мероприятий -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="events-grid">
+
+                <!-- КАРТОЧКА 1: Рождественский турнир по FIFA (Спорт и киберспорт) -->
+                <div class="event-card bg-white rounded-3xl p-6 border border-slate-200 shadow-sm hover:shadow-lg hover:border-adg-green transition-all flex flex-col justify-between" data-category="sport">
+                    <div>
+                        <div class="flex items-center justify-between gap-2 mb-4">
+                            <span class="px-3 py-1 rounded-full bg-adg-greenLight text-adg-green text-[11px] font-bold">
+                                Спорт и киберспорт
+                            </span>
+                            <span class="text-xs font-bold text-adg-red bg-red-50 px-2.5 py-1 rounded-lg">
+                                <i class="fa-solid fa-fire mr-1"></i> Скоро
+                            </span>
+                        </div>
+                        
+                        <div class="w-12 h-12 rounded-2xl bg-adg-greenLight text-adg-green flex items-center justify-center text-xl mb-4">
+                            <i class="fa-solid fa-futbol"></i>
+                        </div>
+
+                        <h3 class="text-xl font-bold text-slate-900 mb-2">Рождественский турнир по FIFA</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed mb-5">
+                            Грандиозный школьный киберспортивный чемпионат по игре FIFA. Сразись с лучшими игроками гимназии за звание чемпиона!
+                        </p>
+                    </div>
+
+                    <div class="pt-4 border-t border-slate-100 space-y-2 text-xs font-semibold text-slate-700">
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-gamepad text-adg-green w-4 text-center"></i>
+                            <span>Дисциплина: <b>Игра FIFA</b></span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fa-regular fa-calendar text-adg-green w-4 text-center"></i>
+                            <span>Первый тур: <b>5 декабря</b></span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-location-dot text-adg-green w-4 text-center"></i>
+                            <span>Место: <b>416 кабинет</b></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- КАРТОЧКА-ШАБЛОН: Культура (можно заменить на своё) -->
+                <div class="event-card bg-white rounded-3xl p-6 border border-slate-200 shadow-sm hover:shadow-lg hover:border-adg-green transition-all flex flex-col justify-between" data-category="culture">
+                    <div>
+                        <div class="flex items-center justify-between gap-2 mb-4">
+                            <span class="px-3 py-1 rounded-full bg-slate-100 text-slate-600 text-[11px] font-bold">
+                                Культура
+                            </span>
+                            <span class="text-xs font-semibold text-slate-400">Анонс</span>
+                        </div>
+                        <div class="w-12 h-12 rounded-2xl bg-slate-100 text-slate-600 flex items-center justify-center text-xl mb-4">
+                            <i class="fa-solid fa-music"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-2">Школьный квартирник</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed mb-5">
+                            Творческий вечер живой музыки, стихов и уютной атмосферы. Выступить может любой ученик.
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-slate-100 text-xs font-semibold text-slate-500">
+                        <i class="fa-regular fa-clock text-adg-green mr-1.5"></i> Дата уточняется
+                    </div>
+                </div>
+
+                <!-- КАРТОЧКА-ШАБЛОН: Наука -->
+                <div class="event-card bg-white rounded-3xl p-6 border border-slate-200 shadow-sm hover:shadow-lg hover:border-adg-green transition-all flex flex-col justify-between" data-category="science">
+                    <div>
+                        <div class="flex items-center justify-between gap-2 mb-4">
+                            <span class="px-3 py-1 rounded-full bg-slate-100 text-slate-600 text-[11px] font-bold">
+                                Наука
+                            </span>
+                            <span class="text-xs font-semibold text-slate-400">Анонс</span>
+                        </div>
+                        <div class="w-12 h-12 rounded-2xl bg-slate-100 text-slate-600 flex items-center justify-center text-xl mb-4">
+                            <i class="fa-solid fa-brain"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-2">Интеллектуальный квиз «Что? Где? Когда?»</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed mb-5">
+                            Командная битва умов среди 5–11 классов на логику, эрудицию и смекалку.
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-slate-100 text-xs font-semibold text-slate-500">
+                        <i class="fa-regular fa-clock text-adg-green mr-1.5"></i> Дата уточняется
+                    </div>
+                </div>
+
+                <!-- КАРТОЧКА-ШАБЛОН: Волонтёрство -->
+                <div class="event-card bg-white rounded-3xl p-6 border border-slate-200 shadow-sm hover:shadow-lg hover:border-adg-green transition-all flex flex-col justify-between" data-category="volunteer">
+                    <div>
+                        <div class="flex items-center justify-between gap-2 mb-4">
+                            <span class="px-3 py-1 rounded-full bg-slate-100 text-slate-600 text-[11px] font-bold">
+                                Волонтёрство
+                            </span>
+                            <span class="text-xs font-semibold text-slate-400">Набор открыт</span>
+                        </div>
+                        <div class="w-12 h-12 rounded-2xl bg-slate-100 text-slate-600 flex items-center justify-center text-xl mb-4">
+                            <i class="fa-solid fa-paw"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-2">Сбор помощи приютам животных</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed mb-5">
+                            Благотворительная акция по сбору корма и необходимых вещей для четвероногих друзей.
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-slate-100 text-xs font-semibold text-slate-500">
+                        <i class="fa-regular fa-clock text-adg-green mr-1.5"></i> Подробности в приёмной
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Кнопка назад -->
+            <div class="text-center mt-12">
+                <a href="index.html" class="inline-flex items-center gap-2 px-6 py-3 bg-white border border-slate-200 hover:border-adg-green text-slate-700 hover:text-adg-green font-bold rounded-xl text-xs shadow-sm transition-all">
+                    <i class="fa-solid fa-arrow-left"></i> Вернуться на главную
+                </a>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer (Точно как на главной) -->
+    <footer class="bg-slate-900 text-slate-400 py-12 mt-auto border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="flex items-center gap-3">
+                <div class="font-black text-2xl tracking-tighter text-adg-green">АдГ</div>
+                <div class="text-xs text-slate-500">Альтернатива для Гимназии &copy; 2026</div>
+            </div>
+            <div class="text-xs text-slate-500 text-center md:text-right">
+                Даже если мы не выиграем, мы продолжим организовывать мероприятия,<br>договариваться с администрацией и помогать ученикам!
+            </div>
+        </div>
+    </footer>
+
+    <!-- Скрипт переключения вкладок (Фильтрация) -->
+    <script>
+        function filterEvents(category, clickedBtn) {
+            // Сбрасываем стили всех кнопок
+            const buttons = document.querySelectorAll('.filter-btn');
+            buttons.forEach(btn => {
+                btn.classList.remove('bg-adg-green', 'text-white', 'shadow-md');
+                btn.classList.add('bg-white', 'text-slate-600', 'border', 'border-slate-200');
+            });
+
+            // Подсвечиваем активную кнопку
+            clickedBtn.classList.remove('bg-white', 'text-slate-600', 'border', 'border-slate-200');
+            clickedBtn.classList.add('bg-adg-green', 'text-white', 'shadow-md');
+
+            // Фильтруем карточки
+            const cards = document.querySelectorAll('.event-card');
+            cards.forEach(card => {
+                if (category === 'all' || card.getAttribute('data-category') === category) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+    </script>
+
+</body>
+</html>
