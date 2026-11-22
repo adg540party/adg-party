@@ -44,61 +44,6 @@
             background-position: 0 0, 10px 10px;
         }
 
-        /* Переключатель партий */
-        .party-switcher {
-            display: flex;
-            align-items: center;
-            cursor: pointer;
-            user-select: none;
-            transition: transform 0.2s ease;
-        }
-        .party-switcher:hover {
-            transform: scale(1.05);
-        }
-        .party-switcher .logo-adg,
-        .party-switcher .logo-ppp {
-            height: 40px;
-            width: auto;
-            transition: opacity 0.3s ease;
-        }
-        .party-switcher .logo-ppp {
-            display: none;
-        }
-
-        /* Когда сайт ППП активен */
-        body.ppp-active .party-switcher .logo-adg { display: none; }
-        body.ppp-active .party-switcher .logo-ppp { display: block; }
-
-        /* Контейнер iframe с сайтом ППП */
-        #ppp-frame {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            border: none;
-            z-index: 9999;
-            background: #fff;
-            display: none;
-        }
-
-        body.ppp-active #ppp-frame {
-            display: block;
-        }
-
-        /* Скрываем весь контент АдГ, когда активен ППП */
-        body.ppp-active header,
-        body.ppp-active main,
-        body.ppp-active footer {
-            display: none;
-        }
-    </style>
-</head>
-<body class="bg-slate-50 text-slate-800 font-sans antialiased selection:bg-adg-green selection:text-white flex flex-col min-h-screen">
-
-    <!-- Iframe с сайтом ППП -->
-    <iframe id="ppp-frame" src="https://pomooorskiy.github.io/" title="Партия подотчётного парламента"></iframe>
-
     <!-- Navigation Bar -->
     <header class="bg-white border-b border-slate-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
